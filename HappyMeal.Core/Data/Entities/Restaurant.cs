@@ -17,21 +17,21 @@ namespace HappyMeal.Core.Data.Entities
 		[MaxLength(MaxLengthDescription)]
 		public string Description { get; set; } = null!;
 
-		[Required]
 		public int DeliveryTime { get; set; }
 
-		[Required]
 		public decimal MinMoneyForOrder { get; set; }
 
-		//Owner Id
+		[ForeignKey(nameof(User))]
+		public int OwnerId { get; set; }
+		public User User { get; set; } = null!;
 
 		[ForeignKey(nameof(City))]
 		public int CityId { get; set; }
 		public City City { get; set; } = null!;
 
-		//Products
+		public HashSet<Product> Products { get; set; } = new HashSet<Product>();
 
-		//Reviews
+		public HashSet<Review> Reviews { get; set; } = new HashSet<Review>();
 
 		public bool IsActive { get; set; }
 	}
