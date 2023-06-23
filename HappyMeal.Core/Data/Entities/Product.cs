@@ -35,9 +35,9 @@ namespace HappyMeal.Core.Data.Entities
 
 		public HashSet<Addon> Addons { get; set; } = new HashSet<Addon>();
 
-		//Ordered Products
+		public HashSet<OrderProduct> OrderedProducts { get; set; } = new HashSet<OrderProduct>();
 
-		//Carts Products
+		public HashSet<CartProduct> CartsProducts { get; set; } = new HashSet<CartProduct>();
 
 		public bool InStock { get; set; } = true;
 

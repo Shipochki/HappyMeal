@@ -21,10 +21,12 @@ namespace HappyMeal.Core.Data.Entities
 
 		public decimal MinMoneyForOrder { get; set; }
 
+		[Required]
 		[ForeignKey(nameof(User))]
 		public int OwnerId { get; set; }
 		public User User { get; set; } = null!;
 
+		[Required]
 		[ForeignKey(nameof(City))]
 		public int CityId { get; set; }
 		public City City { get; set; } = null!;

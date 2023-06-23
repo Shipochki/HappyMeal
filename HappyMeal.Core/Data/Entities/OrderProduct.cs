@@ -8,18 +8,21 @@ using System.Threading.Tasks;
 
 namespace HappyMeal.Core.Data.Entities
 {
-	public class Restaurateur
+	public class OrderProduct
 	{
 		[Key]
 		public int Id { get; set; }
 
 		[Required]
-		[ForeignKey(nameof(User))]		
-		public int UserId { get; set; }
-		public User User { get; set; } = null!;
+		[ForeignKey(nameof(Order))]
+		public int OrderId { get; set; }
 
-		public HashSet<Restaurant> Restaurants { get; set;} = new HashSet<Restaurant>();
+		public Order Order { get; set; } = null!;
 
-		public bool IsActive { get; set; } = true;
+		[Required]
+		[ForeignKey(nameof(Product))]
+		public int ProductId { get; set; }
+
+		public Product Product { get; set; } = null!;
 	}
 }

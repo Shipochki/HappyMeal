@@ -14,10 +14,12 @@ namespace HappyMeal.Core.Data.Entities
 	 
 		public int Rating { get; set; }
 
+		[Required]
 		[ForeignKey(nameof(User))]
 	    public int UserId { get; set; }
 		public User User { get; set; } = null!;
 
+		[Required]
 		[ForeignKey(nameof(Restaurant))]
 		public int RestaurantId { get; set; }
 		public Restaurant Restaurant { get; set; } = null!;
