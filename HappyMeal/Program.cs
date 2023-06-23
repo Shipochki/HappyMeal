@@ -1,8 +1,17 @@
+using HappyMeal.Core;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
+
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<HappyMealDbContext>(options => 
+	options.UseSqlServer(connectionString));
 
 // Add services to the container.
 
 builder.Services.AddControllersWithViews();
+builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
 
 var app = builder.Build();
 
@@ -15,12 +24,13 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+app.UseDefaultFiles();
 app.UseRouting();
 
-
+app.MapControllers();
 app.MapControllerRoute(
 	name: "default",
-	pattern: "{controller}/{action=Index}/{id?}");
+	pattern: "{controller}/{action}");
 
 app.MapFallbackToFile("index.html"); ;
 
