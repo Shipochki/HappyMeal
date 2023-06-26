@@ -1,10 +1,10 @@
-﻿using HappyMeal.Core.Data.Enums;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using static HappyMeal.Core.Common.DataConstatnts.ProductConst;
-
-namespace HappyMeal.Core.Data.Entities
+﻿namespace HappyMeal.Core.Data.Entities
 {
+	using HappyMeal.Core.Data.Enums;
+	using System.ComponentModel.DataAnnotations;
+	using System.ComponentModel.DataAnnotations.Schema;
+	using static HappyMeal.Core.Common.DataConstatnts.ProductConst;
+
 	public class Product
 	{
 		[Key]

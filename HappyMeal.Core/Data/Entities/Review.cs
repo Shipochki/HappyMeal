@@ -1,9 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using static HappyMeal.Core.Common.DataConstatnts.ReviewConst;
-
-namespace HappyMeal.Core.Data.Entities
+﻿namespace HappyMeal.Core.Data.Entities
 {
+	using System.ComponentModel.DataAnnotations;
+	using System.ComponentModel.DataAnnotations.Schema;
+	using static HappyMeal.Core.Common.DataConstatnts.ReviewConst;
+
 	public class Review
 	{
 		[Key]

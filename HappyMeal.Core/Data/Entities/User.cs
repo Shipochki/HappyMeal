@@ -1,8 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
-using static HappyMeal.Core.Common.DataConstatnts.UserConst;
-
-namespace HappyMeal.Core.Data.Entities
+﻿namespace HappyMeal.Core.Data.Entities
 {
+	using System.ComponentModel.DataAnnotations;
+	using static HappyMeal.Core.Common.DataConstatnts.UserConst;
+
 	public class User
 	{
 		[Key]
