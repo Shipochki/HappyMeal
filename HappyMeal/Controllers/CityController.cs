@@ -1,5 +1,4 @@
 ﻿using HappyMeal.Core.Services.City;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HappyMeal.Controllers
@@ -17,9 +16,9 @@ namespace HappyMeal.Controllers
 
 		[HttpGet]
 		[Route("[action]")]
-		public IActionResult All()
+		public async Task<IActionResult> All()
 		{
-			return Ok(10);
+			return Ok(await this._cityService.GetAllCities());
 		}
 	}
 }
