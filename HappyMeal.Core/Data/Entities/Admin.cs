@@ -14,6 +14,10 @@ namespace HappyMeal.Core.Data.Entities
 		public int Id { get; set; }
 
 		[Required]
+		[MaxLength(20)]
+		public string Name { get; set; } = null!;
+
+		[Required]
 		[ForeignKey(nameof(User))]
 		public int UserId { get; set; }
 

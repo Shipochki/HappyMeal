@@ -20,7 +20,7 @@ namespace HappyMeal.Core.Data.Entities
 
 		[Required]
 		[ForeignKey(nameof(Restaurant))]
-		public int RestaurantID { get; set; }
+		public int RestaurantId { get; set; }
 
 		public Restaurant Restaurant { get; set; } = null!;
 

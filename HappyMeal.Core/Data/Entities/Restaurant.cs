@@ -22,9 +22,9 @@ namespace HappyMeal.Core.Data.Entities
 		public decimal MinMoneyForOrder { get; set; }
 
 		[Required]
-		[ForeignKey(nameof(User))]
+		[ForeignKey(nameof(Restaurateur))]
 		public int OwnerId { get; set; }
-		public User User { get; set; } = null!;
+		public Restaurateur Restaurateur { get; set; } = null!;
 
 		[Required]
 		[ForeignKey(nameof(City))]
@@ -34,6 +34,8 @@ namespace HappyMeal.Core.Data.Entities
 		public HashSet<Product> Products { get; set; } = new HashSet<Product>();
 
 		public HashSet<Review> Reviews { get; set; } = new HashSet<Review>();
+
+		public HashSet<Order> Orders { get; set; } = new HashSet<Order>();
 
 		public bool IsActive { get; set; }
 	}

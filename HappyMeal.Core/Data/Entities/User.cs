@@ -26,6 +26,11 @@ namespace HappyMeal.Core.Data.Entities
 
 		public HashSet<Review> Reviews { get; set; } = new HashSet<Review>();
 
+		public HashSet<Order> Orders { get; set; } = new HashSet<Order>();
+
+		public int CartId { get; set; }
+		public Cart Cart { get; set; } = null!;
+
 		public bool IsActive { get; set; } = true;
 	}
 }
