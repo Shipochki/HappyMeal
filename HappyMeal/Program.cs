@@ -1,5 +1,6 @@
 using HappyMeal.Core;
 using HappyMeal.Core.Services.City;
+using HappyMeal.Core.Services.Restaurant;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +16,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddScoped<ICityService, CityService>();
+builder.Services.AddScoped<IRestaurantService, RestaurantService>();
 
 var app = builder.Build();
 

@@ -14,7 +14,7 @@ export const Home = () => {
             <div className='main-section'>
                 <form>
                     <input onChange={(e) => setCity(e.target.value)} placeholder='City here...'></input>
-                    <Link to={`/restaurants/:${city}`}>Search</Link>
+                    <Link to={`/catalog/${city}`}>Search</Link>
                 </form>
             </div>
             <div className='info'>
