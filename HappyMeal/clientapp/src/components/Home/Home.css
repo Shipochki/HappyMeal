@@ -26,3 +26,38 @@
     text-decoration: none;
     color: black;
 }
+
+.info{
+    text-align: center;
+    margin-top: 20px;
+}
+
+.info h3{
+    font-size: 1.5rem;
+    font-weight: 100;
+}
+
+.info h2{
+    font-size: 3rem;
+    color: orange;
+    font-weight: bold;
+}
+
+.info .cards{
+    display: flex;
+    margin-top: 20px;
+    padding-left: 21%;
+}
+
+.card{
+    width: 24%;
+}
+
+.card svg{
+    font-size: 4rem;
+    color: orange;
+}
+
+.card h4{
+    font-size: 1.5rem;
+}
