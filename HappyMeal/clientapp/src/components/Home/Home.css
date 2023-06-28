@@ -9,13 +9,17 @@
 }
 
 .main-section input{
-    width: 65%;
+    width: 54%;
     height: 60px;
     border-radius: 32px;
     border: 0;
-    margin-right: 40px;
     padding: 15px 25px;
     font-size: 1.3rem;
+    margin-right: 15px;
+}
+
+input:focus{
+    outline: none;
 }
 
 .main-section a{
@@ -60,4 +64,18 @@
 
 .card h4{
     font-size: 1.5rem;
+}
+
+.input{
+    display: inline;
+    margin-right: 20px;
+    background-color: white;
+    height: 60px;
+    padding: 23px 26px 23px 0px;
+    border-radius: 32px;
+}
+
+.input button{
+    background-color: white;
+    border: 0;
 }

@@ -15,7 +15,7 @@ export const Menu = () => {
             </div>
             <Link className="cart" to={'/cart'}><FontAwesomeIcon icon={faShoppingBag}/> Cart</Link>
             <Link className="orders" to={'/orders'}><FontAwesomeIcon icon={faCartShopping}/>Orders</Link>
-            <Link className="become" to='/becomeRestaurateur'><FontAwesomeIcon icon={faMotorcycle} />Become Restaurateur</Link>
+            <Link className="become" to={'/becomeRestaurateur'}><FontAwesomeIcon icon={faMotorcycle} />Become Restaurateur</Link>
         </div>
     )
 }

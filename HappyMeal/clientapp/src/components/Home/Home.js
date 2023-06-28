@@ -3,25 +3,21 @@ import '../reset.css';
 import './Home.css';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLocationDot, faHamburger, faShoppingBag } from '@fortawesome/free-solid-svg-icons';
+import { faLocationDot, faHamburger, faShoppingBag, faX } from '@fortawesome/free-solid-svg-icons';
 
 
 export const Home = () => {
-    const [city, setCity] = useState("");
+    const [city, setCity] = useState("empty");
 
     return (
         <div>
             <div className='main-section'>
                 <form>
-                    <input onChange={(e) => setCity(e.target.value)} placeholder='City here...'></input>
-                    {city == undefined && (
-                        <Link to={'/'}>Search</Link>
-                    )}
-
-                    {city != undefined &&(
-                        <Link to={`/catalog/${city}`}>Search</Link>
-                    )}
-
+                    <div className='input'>
+                        <input onChange={(e) => setCity(e.target.value)} placeholder='City here...'></input>
+                        <button type='reset' onClick={(e) => {e.target.value = ""}}><FontAwesomeIcon icon={faX}/></button>
+                    </div>
+                    <Link to={`/catalog/${city}`}>Search</Link>
                 </form>
             </div>
             <div className='info'>
