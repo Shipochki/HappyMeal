@@ -15,9 +15,9 @@ namespace HappyMeal.Controllers
 			_restaurantService = restaurantService;
 		}
 
-		[HttpGet]
+		[HttpPost]
 		[Route("[action]")]
-		public async Task<IActionResult> GetAllByCity(string city)
+		public async Task<IActionResult> GetAllByCity([FromBody]string city)
 		{
 			return Ok(await this._restaurantService.AllByCity(city));
 		}
