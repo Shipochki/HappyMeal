@@ -1,10 +1,21 @@
 import { useParams } from "react-router-dom"
+import { CatalogItem } from "./CatalogItem/CatalogItem.js";
 
 export const Catalog = () =>{
-    const data = GetData()
-
+    const data = new Array(GetData());
+    console.log(data);
     return (
-        <div>Hello</div>
+        <section className="catalog">
+          <h1>All Restaurants</h1>
+
+          {data.map(x =>
+            <CatalogItem key={x.id} {...x}/> 
+          )}
+
+          {data.length === 0 && (
+            <h3 className="no-articles">No restaurants yet!</h3>
+          )}
+        </section>
     )
 }
 
@@ -21,4 +32,6 @@ async function GetData(){
     });
 
     const data = await response.json();
+
+    return data;
 }
