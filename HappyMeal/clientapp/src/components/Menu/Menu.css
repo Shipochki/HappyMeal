@@ -1,0 +1,65 @@
+.menu{
+    margin-top: 100px;
+    background-color: white;
+    width: 33%;
+    margin-left: 33%;
+    border-radius: 8px;
+    box-shadow: 0px 0px 8px 0px black;
+    height: 300px;
+    margin-bottom: 300px;
+}
+
+.menu a{
+    display: block;
+    width: 90%;
+    background-color: white;
+    border-radius: 32px;
+    font-size: 1.8rem;
+    text-decoration: none;
+    color: black;
+    text-align: center;
+    margin: 20px 0;    
+    margin-left: 28px;
+}
+
+.menu a:hover{
+    background-color: lightgrey;
+}
+
+.log-sign-btns{
+    padding: 20px 0;
+    margin-bottom: 15px;
+}
+
+.log-sign-btns a{
+    text-decoration: none;
+    margin-left: 17px;
+    font-size: 2rem;
+    padding: 12px 100px;
+    border-radius: 32px;
+    display: inline;
+}
+
+.log-sign-btns .login-btn{
+    background-color: lightgray;
+    color: black;
+}
+
+.log-sign-btns .login-btn:hover{
+    background-color: gray;
+    color: black;
+}
+
+.log-sign-btns .register-btn{
+    background-color: orange;
+    color: white;
+}
+
+.log-sign-btns .register-btn:hover{
+    background-color: orangered;
+    color: white;
+}
+
+.menu a svg{
+    margin-right: 10px;
+}

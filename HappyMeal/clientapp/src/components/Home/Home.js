@@ -14,7 +14,14 @@ export const Home = () => {
             <div className='main-section'>
                 <form>
                     <input onChange={(e) => setCity(e.target.value)} placeholder='City here...'></input>
-                    <Link to={`/catalog/${city}`}>Search</Link>
+                    {city == undefined && (
+                        <Link to={'/'}>Search</Link>
+                    )}
+
+                    {city != undefined &&(
+                        <Link to={`/catalog/${city}`}>Search</Link>
+                    )}
+
                 </form>
             </div>
             <div className='info'>

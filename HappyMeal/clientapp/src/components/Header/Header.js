@@ -13,7 +13,7 @@ export const Header = () => {
         <h1><Link className='home' to='/'><FontAwesomeIcon icon={faBurger} />HappyMeal</Link></h1>
         <nav>
             <Link to='/becomeRestaurateur'><FontAwesomeIcon icon={faMotorcycle} />Become Restaurateur</Link>
-            <Link to='/home/barsMenu'><FontAwesomeIcon icon={faBars} /></Link>
+            <Link to='/menu'><FontAwesomeIcon icon={faBars} /></Link>
         </nav>
         </header>
     )
