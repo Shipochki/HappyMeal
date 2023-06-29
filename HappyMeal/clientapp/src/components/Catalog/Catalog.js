@@ -2,7 +2,8 @@ import { useParams } from "react-router-dom"
 import { CatalogItem } from "./CatalogItem/CatalogItem.js";
 
 export const Catalog = () =>{
-    const data = new Array(GetData());
+    const data = GetData();
+
     return (
         <section className="catalog">
           <h1>All Restaurants</h1>
@@ -19,7 +20,7 @@ export const Catalog = () =>{
 }
 
 async function GetData(){
-    const{ city } = useParams();
+  const{ city } = useParams();
 
     const response = await fetch(`/api/restaurant/getallbycity`, {
       method: "POST", // GET, POST, PUT, DELETE, etc.
@@ -32,5 +33,5 @@ async function GetData(){
 
     const data = await response.json();
 
-    return data;
+    return Object.values(data);
 }

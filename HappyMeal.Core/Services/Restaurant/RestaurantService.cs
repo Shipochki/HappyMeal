@@ -1,4 +1,5 @@
-﻿using HappyMeal.Core.Services.Restaurant.Models;
+﻿using HappyMeal.Core.Data.Entities;
+using HappyMeal.Core.Services.Restaurant.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace HappyMeal.Core.Services.Restaurant
@@ -10,6 +11,20 @@ namespace HappyMeal.Core.Services.Restaurant
 		public RestaurantService(HappyMealDbContext context)
 		{
 			_context = context;
+		}
+
+		public async Task<List<RestaurantModel>> All()
+		{
+			return await this._context.Restaurants
+				.Select(r => new RestaurantModel
+				{
+					Id = r.Id,
+					Name = r.Name,
+					DeliveryTime = r.DeliveryTime,
+					MinMoneyForOrder = r.MinMoneyForOrder,
+					Rating = r.Reviews.Average(r => r.Rating)
+				})
+				.ToListAsync();
 		}
 
 		public async Task<List<RestaurantModel>> AllByCity(string city)

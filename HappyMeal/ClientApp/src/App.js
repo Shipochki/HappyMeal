@@ -1,17 +1,26 @@
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route, useNavigate, useParams } from "react-router-dom";
 import { Home } from "./components/Home/Home.js";
 import { Header } from "./components/Header/Header.js";
 import { Footer } from "./components/Footer/Footer.js";
 import { Catalog } from "./components/Catalog/Catalog.js";
 import { Menu } from "./components/Menu/Menu.js";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { authServiceFactory } from "./services/authService.js";
 import { AuthContext } from "./contexts/AuthContext.js";
+import { restaurantServiceFactory } from "./services/restaurantService.js";
 
 function App() {
   const navigate = useNavigate();
+  const [restaurants, setRestaurants] = useState([]);
   const [auth, setAuth] = useState({});
+  const restaurantService = restaurantServiceFactory(auth.accessToken);
   const authService = authServiceFactory(auth.accessToken);
+
+  //useEffect(() => {
+  //  restaurantService.getAll().then((result) => {
+  //    setRestaurants(result);
+  //  });
+  //});
 
   const onLoginSubmit = async (data) => {
     try {
