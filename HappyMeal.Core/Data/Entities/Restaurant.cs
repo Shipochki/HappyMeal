@@ -17,8 +17,12 @@
 		[MaxLength(MaxLengthDescription)]
 		public string Description { get; set; } = null!;
 
+		public string? ImgLinkUrl { get; set; }
+
+		[Required]
 		public int DeliveryTime { get; set; }
 
+		[Required]
 		public decimal MinMoneyForOrder { get; set; }
 
 		[Required]

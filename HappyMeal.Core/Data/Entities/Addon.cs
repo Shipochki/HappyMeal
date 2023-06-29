@@ -21,6 +21,7 @@ namespace HappyMeal.Core.Data.Entities
 		[MaxLength(MaxLengthWeight)]
 		public string? Weight { get; set; }
 
+		[Required]
 		public decimal Price { get; set; }
 
 		[Required]

@@ -24,6 +24,10 @@
 		[MaxLength(MaxLengthEmail)]
 		public string Email { get; set; } = null!;
 
+		[Required]
+		[MaxLength(MaxLengthPassword)]
+		public string Password { get; set; } = "password";
+
 		public HashSet<Review> Reviews { get; set; } = new HashSet<Review>();
 
 		public HashSet<Order> Orders { get; set; } = new HashSet<Order>();

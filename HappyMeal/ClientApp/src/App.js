@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { authServiceFactory } from "./services/authService.js";
 import { AuthContext } from "./contexts/AuthContext.js";
 import { restaurantServiceFactory } from "./services/restaurantService.js";
+import { Login } from "./components/Login/Login.js";
 
 function App() {
   const navigate = useNavigate();
@@ -75,6 +76,7 @@ function App() {
         <main id="main-content">
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path='/login' element={<Login />} />
             <Route path="/menu" element={<Menu />} />
             <Route path="/catalog/:city" element={<Catalog />} />
           </Routes>

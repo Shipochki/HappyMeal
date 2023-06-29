@@ -19,6 +19,7 @@
 
 		public Restaurant Restaurant { get; set; } = null!;
 
+		[Required]
 		public decimal Subtotal { get; set; }
 	}
 }

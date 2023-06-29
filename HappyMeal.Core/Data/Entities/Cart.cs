@@ -15,8 +15,10 @@
 
 		public HashSet<CartProduct> CartsProducts { get; set; } = new HashSet<CartProduct>();
 
+		[Required]
 		public decimal DeliveryCosts { get; set; }
 
+		[Required]
 		public decimal Subtotal { get; set; }
 	}
 }
