@@ -3,7 +3,6 @@ import { CatalogItem } from "./CatalogItem/CatalogItem.js";
 
 export const Catalog = () =>{
     const data = new Array(GetData());
-    console.log(data);
     return (
         <section className="catalog">
           <h1>All Restaurants</h1>
