@@ -18,7 +18,8 @@ function App() {
   const authService = authServiceFactory(auth.accessToken);
 
   //useEffect(() => {
-  //  restaurantService.getAll().then((result) => {
+  //  restaurantService.getAll()
+  //  .then((result) => {
   //    setRestaurants(result);
   //  });
   //});

@@ -3,6 +3,7 @@ import { CatalogItem } from "./CatalogItem/CatalogItem.js";
 
 export const Catalog = () =>{
     const data = GetData();
+    console.log(data);
 
     return (
         <section className="catalog">

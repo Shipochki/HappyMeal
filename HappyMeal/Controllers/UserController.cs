@@ -1,6 +1,7 @@
 ﻿using HappyMeal.Core.Services.User;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json.Nodes;
 
 namespace HappyMeal.Controllers
 {
@@ -17,9 +18,9 @@ namespace HappyMeal.Controllers
 
 		[HttpPost]
 		[Route("[action]")]
-		public async Task<IActionResult> Login([FromBody] object obj)
+		public async Task<IActionResult> Login()
 		{
-			return Ok(10);
+			return Ok(await this._userService.Login("test", "test"));
 		}
 	}
 }
