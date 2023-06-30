@@ -60,6 +60,17 @@
     color: white;
 }
 
+.log-sign-btns .logout-btn{
+    padding: 12px 250px;
+    background-color: orange;
+    color: white;
+}
+ 
+.log-sign-btns .login-btn:hover{
+    background-color: orangered;
+    color: white;
+}
+
 .menu a svg{
     margin-right: 10px;
 }

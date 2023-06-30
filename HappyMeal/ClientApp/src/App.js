@@ -1,29 +1,22 @@
-import { Routes, Route, useNavigate, useParams } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import { Home } from "./components/Home/Home.js";
 import { Header } from "./components/Header/Header.js";
 import { Footer } from "./components/Footer/Footer.js";
 import { Catalog } from "./components/Catalog/Catalog.js";
 import { Menu } from "./components/Menu/Menu.js";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { authServiceFactory } from "./services/authService.js";
 import { AuthContext } from "./contexts/AuthContext.js";
-import { restaurantServiceFactory } from "./services/restaurantService.js";
 import { Login } from "./components/Login/Login.js";
 import { Register } from "./components/Register/Register.js";
+import { Logout } from "./components/Logout/Logout.js"
 
 function App() {
   const navigate = useNavigate();
   const [restaurants, setRestaurants] = useState([]);
   const [auth, setAuth] = useState({});
-  const restaurantService = restaurantServiceFactory(auth.accessToken);
   const authService = authServiceFactory(auth.accessToken);
 
-  //useEffect(() => {
-  //  restaurantService.getAll()
-  //  .then((result) => {
-  //    setRestaurants(result);
-  //  });
-  //});
 
   const getCatalogSubmit = async (city) => {
     try{
@@ -61,6 +54,10 @@ function App() {
 
       setAuth(result);
 
+      console.log(result);
+
+      localStorage.setItem(['accessToken'], result);
+
       navigate("/");
     } catch (error) {
       console.log("Login problem");
@@ -87,6 +84,8 @@ function App() {
 
       setAuth(result);
 
+      localStorage.setItem(['accessToken'], result['accessToken']);
+
       navigate("/");
     } catch (error) {
       console.log("Login problem");
@@ -94,8 +93,6 @@ function App() {
   };
 
   const onLogout = async () => {
-    await authService.logout();
-
     setAuth({});
   };
 
@@ -120,6 +117,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path='/login' element={<Login />} />
             <Route path='/register' element={<Register/>} />
+            <Route path='/logout' element={<Logout />} />
             <Route path="/menu" element={<Menu />} />
             <Route path="/catalog" element={<Catalog restaurants={restaurants}/>} />
           </Routes>
