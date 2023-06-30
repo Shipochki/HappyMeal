@@ -1,6 +1,8 @@
 ﻿using HappyMeal.Core.Services.User;
+using HappyMeal.Core.Services.User.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System.Text.Json.Nodes;
 
 namespace HappyMeal.Controllers
@@ -9,7 +11,7 @@ namespace HappyMeal.Controllers
 	[ApiController]
 	public class UserController : ControllerBase
 	{
-		private IUserService _userService;
+		private readonly IUserService _userService;
 
 		public UserController(IUserService userService)
 		{
@@ -18,9 +20,13 @@ namespace HappyMeal.Controllers
 
 		[HttpPost]
 		[Route("[action]")]
-		public async Task<IActionResult> Login()
+		public async Task<IActionResult> Login([FromBody]object loginFormKeys)
 		{
-			return Ok(await this._userService.Login("test", "test"));
+			LoginUserModel model = JsonConvert.DeserializeObject<LoginUserModel>(loginFormKeys.ToString());
+
+			return Ok(await this._userService.Login(model.Email, model.Password));
 		}
+
+		
 	}
 }

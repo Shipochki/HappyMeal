@@ -1,12 +1,13 @@
 const request = async (method, token, url, data) => {
     const options = {};
+    options.mode = 'cors';
 
     if (method !== 'GET') {
         options.method = method;
-
+        
         if (data) {
             options.headers = {
-                'content-type': 'application/json',
+                'Content-Type': 'application/json',
             };
 
             options.body = JSON.stringify(data);

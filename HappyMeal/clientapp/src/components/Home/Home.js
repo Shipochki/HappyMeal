@@ -1,23 +1,30 @@
-import { useState } from 'react';
+import { useContext } from 'react';
 import '../reset.css';
 import './Home.css';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationDot, faHamburger, faShoppingBag, faX } from '@fortawesome/free-solid-svg-icons';
+import { useForm } from '../../hooks/useForm';
+import { AuthContext } from '../../contexts/AuthContext';
 
+const city = {
+    city: 'city'
+}
 
 export const Home = () => {
-    const [city, setCity] = useState("empty");
-
+    const { getCatalogSubmit } = useContext(AuthContext);
+    const { values, changeHandler, onSubmit } = useForm({
+        [city.city]: '',
+    }, getCatalogSubmit);
     return (
         <div>
             <div className='main-section'>
-                <form>
+                <form method='POST' onSubmit={onSubmit}>
                     <div className='input'>
-                        <input onChange={(e) => setCity(e.target.value)} placeholder='City here...'></input>
+                        <input placeholder='City here...' name={city.city} value={values[city.city]} onChange={changeHandler}></input>
                         <button type='reset' onClick={(e) => {e.target.value = ""}}><FontAwesomeIcon icon={faX}/></button>
                     </div>
-                    <Link to={`/catalog/${city}`}>Search</Link>
+                    <input className='input-submit' type='submit' value={'Search'}/>
                 </form>
             </div>
             <div className='info'>

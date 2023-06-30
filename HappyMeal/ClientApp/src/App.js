@@ -24,9 +24,39 @@ function App() {
   //  });
   //});
 
-  const onLoginSubmit = async (data) => {
+  const getCatalogSubmit = async (city) => {
+    try{
+      const response = await fetch(`/api/restaurant/getallbycity`, {
+      method: "POST", // GET, POST, PUT, DELETE, etc.
+      mode: "cors", // no-cors,cors, same-origin
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(city['city']),
+    });
+
+    const data = await response.json();
+
+    setRestaurants(data);
+
+    navigate('/catalog')
+    } catch (error){
+      console.log("Get problem");
+    }
+  }
+
+  const onLoginSubmit = async (loginFormKeys) => {
     try {
-      const result = await authService.login(data);
+      const response = await fetch(`/api/user/login`, {
+        method: "POST", // GET, POST, PUT, DELETE, etc.
+        mode: "cors", // no-cors,cors, same-origin
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(loginFormKeys),
+      });
+  
+      const result = await response.json();
 
       setAuth(result);
 
@@ -60,6 +90,7 @@ function App() {
   };
 
   const contextValues = {
+    getCatalogSubmit,
     onLoginSubmit,
     onRegisterSubmit,
     onLogout,
@@ -79,7 +110,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path='/login' element={<Login />} />
             <Route path="/menu" element={<Menu />} />
-            <Route path="/catalog/:city" element={<Catalog />} />
+            <Route path="/catalog" element={<Catalog restaurants={restaurants}/>} />
           </Routes>
         </main>
 
