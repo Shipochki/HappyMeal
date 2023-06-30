@@ -9,6 +9,7 @@ import { authServiceFactory } from "./services/authService.js";
 import { AuthContext } from "./contexts/AuthContext.js";
 import { restaurantServiceFactory } from "./services/restaurantService.js";
 import { Login } from "./components/Login/Login.js";
+import { Register } from "./components/Register/Register.js";
 
 function App() {
   const navigate = useNavigate();
@@ -66,20 +67,29 @@ function App() {
     }
   };
 
-  const onRegisterSubmit = async (values) => {
-    const { confirmPassword, ...registerData } = values;
+  const onRegisterSubmit = async (registerFormKeys) => {
+    const { confirmPassword, ...registerData } = registerFormKeys;
     if (confirmPassword !== registerData.password) {
       return;
     }
 
     try {
-      const result = await authService.register(registerData);
+      const response = await fetch(`/api/user/register`, {
+        method: "POST", // GET, POST, PUT, DELETE, etc.
+        mode: "cors", // no-cors,cors, same-origin
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(registerFormKeys),
+      });
+  
+      const result = await response.json();
 
       setAuth(result);
 
       navigate("/");
     } catch (error) {
-      console.log("Register problem");
+      console.log("Login problem");
     }
   };
 
@@ -109,6 +119,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path='/login' element={<Login />} />
+            <Route path='/register' element={<Register/>} />
             <Route path="/menu" element={<Menu />} />
             <Route path="/catalog" element={<Catalog restaurants={restaurants}/>} />
           </Routes>

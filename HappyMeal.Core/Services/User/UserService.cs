@@ -4,7 +4,9 @@
 	using HappyMeal.Core.Services.Cart;
 	using HappyMeal.Core.Services.User.Models;
 	using Microsoft.EntityFrameworkCore;
+	using Newtonsoft.Json;
 	using static HappyMeal.Core.Common.TokenGenerator;
+	using static HappyMeal.Core.Common.Validation;
 
 	public class UserService : IUserService
 	{
@@ -17,36 +19,50 @@
 			_cartService = cartService;
 		}
 
-		public async Task<UserModel> Login(string email, string password)
+		public async Task<UserModel> Login(object loginFormKeys)
 		{
+			LoginUserJSONModel model = JsonConvert.DeserializeObject<LoginUserJSONModel>(loginFormKeys.ToString());
+
+			if (model == null || !IsValid(model))
+			{
+				return null;
+			}
+
 			User user = await this._context
 				.Users
-				.FirstOrDefaultAsync(u => u.Email == email);
+				.FirstOrDefaultAsync(u => u.Email == model.Email);
 
 			if (user == null)
 			{
 				return null;
 			}
 
-			if (user.Password != password)
+			if (user.Password != model.Password)
 			{
 				return null;
 			}
 
-			UserModel model = new UserModel()
+			UserModel result = new UserModel()
 			{
 				Id = user.Id,
 				FirstName = user.FirstName,
 				LastName = user.LastName,
-				Email = email,
+				Email = user.Email,
 				AccessToken = RandomToken(30)
 			};
 
-			return model;
+			return result;
 		}
 
-		public async Task<UserModel> Register(CreateUserModel model)
+		public async Task<UserModel> Register(object registerFormKeys)
 		{
+			RegisterUserJSONModel model = JsonConvert.DeserializeObject<RegisterUserJSONModel>(registerFormKeys.ToString());
+
+			if (model == null || !IsValid(model))
+			{
+				return null;
+			}
+
 			User user = await this._context
 				.Users
 				.FirstOrDefaultAsync(u => u.Email == model.Email);

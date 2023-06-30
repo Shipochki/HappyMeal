@@ -27,11 +27,16 @@
 
 		public async Task<int> GetLastCartId()
 		{
-			Cart cart = await this._context
+			List<Cart> carts = await this._context
 				.Carts
-				.LastAsync();
+				.ToListAsync();
 
-			return cart.Id;
+			if(carts == null)
+			{
+				return 0;
+			}
+
+			return carts.Count;
 		}
 	}
 }

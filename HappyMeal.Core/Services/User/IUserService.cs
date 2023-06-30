@@ -4,8 +4,8 @@
 
 	public interface IUserService
 	{
-		Task<UserModel> Login(string email, string password);
+		Task<UserModel> Login(object loginFormKeys);
 
-		Task<UserModel> Register(CreateUserModel model);
+		Task<UserModel> Register(object registerFormKeys);
 	}
 }

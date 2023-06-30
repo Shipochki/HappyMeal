@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace HappyMeal.Core.Services.User.Models
 {
 	[JsonObject]
-	public class LoginUserModel
+	public class LoginUserJSONModel
 	{
 		[JsonProperty("email")]
 		[Required]
