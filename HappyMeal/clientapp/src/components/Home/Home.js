@@ -22,7 +22,7 @@ export const Home = () => {
                 <form method='POST' onSubmit={onSubmit}>
                     <div className='input'>
                         <input placeholder='City here...' name={city.city} value={values[city.city]} onChange={changeHandler}></input>
-                        <button type='reset' onClick={(e) => {e.target.value = ""}}><FontAwesomeIcon icon={faX}/></button>
+                        <button type='reset' onClick={changeHandler} onClickCapture={() => {values[city.city] = ''}}><FontAwesomeIcon icon={faX}/></button>
                     </div>
                     <input className='input-submit' type='submit' value={'Search'}/>
                 </form>

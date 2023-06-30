@@ -1,7 +1,9 @@
 ﻿namespace HappyMeal.Core.Services.User
 {
 	using HappyMeal.Core.Data.Entities;
+	using HappyMeal.Core.Services.Admin;
 	using HappyMeal.Core.Services.Cart;
+	using HappyMeal.Core.Services.Restaurateur;
 	using HappyMeal.Core.Services.User.Models;
 	using Microsoft.EntityFrameworkCore;
 	using Newtonsoft.Json;
@@ -10,13 +12,20 @@
 
 	public class UserService : IUserService
 	{
-		private HappyMealDbContext _context;
-		private ICartService _cartService;
+		private readonly HappyMealDbContext _context;
+		private readonly ICartService _cartService;
+		private readonly IRestaurateurService _restaurateurService;
+		private readonly IAdminService _adminService;
 
-		public UserService(HappyMealDbContext context, ICartService cartService)
+		public UserService(HappyMealDbContext context, 
+			ICartService cartService, 
+			IRestaurateurService restaurateurService,
+			IAdminService adminService)
 		{
 			_context = context;
 			_cartService = cartService;
+			_restaurateurService = restaurateurService;
+			_adminService = adminService;
 		}
 
 		public async Task<UserModel> Login(object loginFormKeys)
@@ -42,13 +51,18 @@
 				return null;
 			}
 
+			bool isRestaurateur = await this._restaurateurService.IsRestaurateur(user.Id);
+			bool isAdmin = await this._adminService.IsAdmin(user.Id);
+
 			UserModel result = new UserModel()
 			{
 				Id = user.Id,
 				FirstName = user.FirstName,
 				LastName = user.LastName,
 				Email = user.Email,
-				AccessToken = RandomToken(30)
+				AccessToken = RandomToken(30),
+				IsRestaurateur = isRestaurateur,
+				IsAdmin = isAdmin
 			};
 
 			return result;
@@ -95,7 +109,9 @@
 				FirstName = newUser.FirstName,
 				LastName = newUser.LastName,
 				Email = newUser.Email,
-				AccessToken = RandomToken(30)
+				AccessToken = RandomToken(30),
+				IsRestaurateur = false,
+				IsAdmin = false,
 			};
 
 			return result;

@@ -54,10 +54,6 @@ function App() {
 
       setAuth(result);
 
-      console.log(result);
-
-      localStorage.setItem(['accessToken'], result);
-
       navigate("/");
     } catch (error) {
       console.log("Login problem");
@@ -84,11 +80,9 @@ function App() {
 
       setAuth(result);
 
-      localStorage.setItem(['accessToken'], result['accessToken']);
-
       navigate("/");
     } catch (error) {
-      console.log("Login problem");
+      console.log("Register problem");
     }
   };
 
@@ -101,7 +95,7 @@ function App() {
     onLoginSubmit,
     onRegisterSubmit,
     onLogout,
-    userId: auth._id,
+    userId: auth.id,
     token: auth.accessToken,
     userEmail: auth.email,
     isAuthenticated: !!auth.accessToken,
