@@ -29,5 +29,13 @@ namespace HappyMeal.Controllers
 		{
 			return Ok(await this._restaurateurService.GetAllCandidates());
 		}
+
+		[HttpPost]
+		[Route("[action]")]
+		public async Task<IActionResult> ApproveCandidate([FromBody]int id)
+		{
+			await this._restaurateurService.ApproveCandidate(id);
+			return Ok();
+		}
 	}
 }

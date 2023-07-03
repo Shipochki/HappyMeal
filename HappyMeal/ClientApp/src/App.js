@@ -78,6 +78,25 @@ function App() {
     }
   }
 
+  const approveCandidate = async (id) => {
+    try {
+      const response = await fetch(`/api/restaurateur/approvecandidate`, {
+        method: "POST", // GET, POST, PUT, DELETE, etc.
+        mode: "cors", // no-cors,cors, same-origin
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(id.id),
+      });
+  
+      const result = await response.json();
+
+      navigate("/menu");
+    } catch (error) {
+      console.log("approveCandidate problem");
+    }
+  }
+
   const onLoginSubmit = async (loginFormKeys) => {
     try {
       const response = await fetch(`/api/user/login`, {
@@ -134,7 +153,8 @@ function App() {
   const contextValues = {
     getCatalogSubmit,
     getAllCandidates,
-    onBecomeRestaurateur,    
+    onBecomeRestaurateur,  
+    approveCandidate,  
     onLoginSubmit,
     onRegisterSubmit,
     onLogout,

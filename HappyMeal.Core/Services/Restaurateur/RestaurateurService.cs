@@ -77,5 +77,19 @@
 
 			return true;
 		}
+
+		public async Task ApproveCandidate(int id)
+		{
+			Restaurateur restaurateur = await this._context
+				.Restaurateurs
+				.FirstOrDefaultAsync(r  => r.Id == id);
+
+			if (restaurateur != null)
+			{
+				restaurateur.IsActive = true;
+			}
+
+			await this._context.SaveChangesAsync();
+		}
 	}
 }
