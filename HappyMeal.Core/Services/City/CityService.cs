@@ -38,5 +38,29 @@
 
 			return cities;
 		}
+
+		public async Task<int> GetCityIdByName(string cityName)
+		{
+			City city = await this._context
+				.Cities
+				.FirstOrDefaultAsync(c => c.Name == cityName);
+
+			if(city == null)
+			{
+				CreateCity(new CreateCityModel()
+				{
+					Name = cityName,
+				});
+
+				city = new City()
+				{
+					Name = cityName,
+				};
+
+				await this._context.AddAsync(city);
+			}
+
+			return city.Id;
+		}
 	}
 }

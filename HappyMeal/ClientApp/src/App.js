@@ -12,6 +12,7 @@ import { Register } from "./components/Register/Register.js";
 import { Logout } from "./components/Logout/Logout.js"
 import { BecomeRestaurateur } from "./components/BecomeRestaurateur/BecomeRestaurateur.js";
 import { Candidates } from "./components/Candidates/Candidates.js";
+import { AddRestaurant } from "./components/AddRestaurant/AddRestaurant.js";
 
 function App() {
   const navigate = useNavigate();
@@ -97,6 +98,25 @@ function App() {
     }
   }
 
+  const onCreateRestaurant = async (createFormKeys) => {
+    try {
+      const response = await fetch(`/api/restaurant/createrestaurant`, {
+        method: "POST", // GET, POST, PUT, DELETE, etc.
+        mode: "cors", // no-cors,cors, same-origin
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(createFormKeys),
+      });
+  
+      const id = await response.json();
+
+      navigate(`/restaurant/${id}`);
+    } catch (error) {
+      console.log("create problem");
+    }
+  }
+
   const onLoginSubmit = async (loginFormKeys) => {
     try {
       const response = await fetch(`/api/user/login`, {
@@ -158,6 +178,7 @@ function App() {
     onLoginSubmit,
     onRegisterSubmit,
     onLogout,
+    onCreateRestaurant,
     userId: auth.id,
     token: auth.accessToken,
     userEmail: auth.email,
@@ -182,6 +203,7 @@ function App() {
             <Route path="/catalog" element={<Catalog restaurants={restaurants}/>} />
             <Route path="/becomeRestaurateur" element={<BecomeRestaurateur/>} />
             <Route path="/candidates" element={<Candidates candidates={candidates}/>} />
+            <Route path="/createRestaurant" element={<AddRestaurant />} />
           </Routes>
         </main>
 

@@ -91,5 +91,14 @@
 
 			await this._context.SaveChangesAsync();
 		}
+
+		public async Task<int> GetRestaurateurByUserId(int id)
+		{
+			Restaurateur restaurateur = await this._context
+				.Restaurateurs
+				.FirstOrDefaultAsync(r => r.UserId == id);
+
+			return restaurateur.Id;
+		}
 	}
 }

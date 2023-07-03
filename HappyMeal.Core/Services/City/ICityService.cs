@@ -7,5 +7,7 @@
 		Task CreateCity(CreateCityModel model);
 
 		Task<IEnumerable<CityModel>> GetAllCities();
+
+		Task<int> GetCityIdByName(string cityName);
 	}
 }

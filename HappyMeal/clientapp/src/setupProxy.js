@@ -12,7 +12,8 @@ const context =  [
   "/api/user/register",
   "/api/restaurateur/become",
   "/api/restaurateur/getallcandidates",
-  "/api/restaurateur/approvecandidate"
+  "/api/restaurateur/approvecandidate",
+  "/api/restaurant/createrestaurant"
 ];
 
 module.exports = function(app) {

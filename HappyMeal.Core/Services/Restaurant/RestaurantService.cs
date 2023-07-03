@@ -1,16 +1,25 @@
-﻿using HappyMeal.Core.Data.Entities;
-using HappyMeal.Core.Services.Restaurant.Models;
-using Microsoft.EntityFrameworkCore;
-
-namespace HappyMeal.Core.Services.Restaurant
+﻿namespace HappyMeal.Core.Services.Restaurant
 {
+	using HappyMeal.Core.Data.Entities;
+	using HappyMeal.Core.Services.City;
+	using HappyMeal.Core.Services.Restaurant.Models;
+	using HappyMeal.Core.Services.Restaurateur;
+	using Microsoft.EntityFrameworkCore;
+	using Newtonsoft.Json;
+
 	public class RestaurantService : IRestaurantService
 	{
-		HappyMealDbContext _context;
+		private readonly HappyMealDbContext _context;
+		private readonly ICityService _cityService;
+		private readonly IRestaurateurService _restaurateurService;
 
-		public RestaurantService(HappyMealDbContext context)
+		public RestaurantService(HappyMealDbContext context, 
+			ICityService cityService,
+			IRestaurateurService restaurateurService)
 		{
 			_context = context;
+			_cityService = cityService;
+			_restaurateurService = restaurateurService;
 		}
 
 		public async Task<List<RestaurantModel>> All()
@@ -40,6 +49,54 @@ namespace HappyMeal.Core.Services.Restaurant
 					Rating = r.Reviews.Average(r => r.Rating)
 				})
 				.ToListAsync();
+		}
+
+		public async Task<int> CreateRestaurant(object data)
+		{
+			CreateRestaurantJSONModel model = JsonConvert.DeserializeObject<CreateRestaurantJSONModel>(data.ToString());
+
+			if(model == null)
+			{
+				return -1;
+			}
+
+			int cityId = await this._cityService.GetCityIdByName(model.CityName);
+			int ownerId = await this._restaurateurService.GetRestaurateurByUserId(model.OwnerId);
+
+			Restaurant restaurant = new Restaurant() 
+			{ 
+				Name = model.Name,
+				Description = model.Description,
+				ImgLinkUrl = model.ImgLinkUrl,
+				DeliveryTime = model.DeliveryTime,
+				MinMoneyForOrder = model.MinMoneyForOrder,
+				OwnerId = ownerId,
+				CityId = cityId,
+			};
+			
+			await this._context.Restaurants.AddAsync(restaurant);
+			await this._context.SaveChangesAsync();
+
+			return restaurant.Id;
+		}
+
+		public async Task<DetailsRestaurantModel> GetRestaurantById(int id)
+		{
+			DetailsRestaurantModel restaurant = await this._context.Restaurants
+				.Select(r => new DetailsRestaurantModel()
+				{
+					Id = r.Id,
+					Name = r.Name,
+					Description = r.Description,
+					ImgLinkUrl = r.ImgLinkUrl,
+					DeliveryTime = r.DeliveryTime,
+					MinMoneyForOrder = r.MinMoneyForOrder,
+					OwnerId = r.OwnerId,
+					CityName = r.City.Name,
+				})
+				.FirstOrDefaultAsync(r => r.Id == id);
+
+			return restaurant;
 		}
 	}
 }

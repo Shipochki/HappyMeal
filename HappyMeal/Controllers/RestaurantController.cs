@@ -28,5 +28,19 @@ namespace HappyMeal.Controllers
 		{
 			return Ok(await this._restaurantService.AllByCity(city));
 		}
+
+		[HttpPost]
+		[Route("[action]")]
+		public async Task<IActionResult> CreateRestaurant([FromBody] object createFormKeys)
+		{
+			return Ok(await this._restaurantService.CreateRestaurant(createFormKeys));
+		}
+
+		[HttpPost]
+		[Route("[action]")]
+		public async Task<IActionResult> DetailsRestaurant([FromBody] int id)
+		{
+			return Ok(await this._restaurantService.GetRestaurantById(id));
+		}
 	}
 }

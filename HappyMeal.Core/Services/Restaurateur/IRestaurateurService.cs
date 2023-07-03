@@ -13,5 +13,7 @@ namespace HappyMeal.Core.Services.Restaurateur
 		Task<bool> IsCandidate(int userId);
 
 		Task ApproveCandidate(int id);
+
+		Task<int> GetRestaurateurByUserId(int id);
 	}
 }
