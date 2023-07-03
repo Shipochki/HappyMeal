@@ -10,6 +10,7 @@ const context =  [
   "/api/restaurant/getall",
   "/api/user/login",
   "/api/user/register",
+  "/api/restaurateur/become"
 ];
 
 module.exports = function(app) {

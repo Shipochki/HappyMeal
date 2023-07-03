@@ -10,13 +10,13 @@ import { AuthContext } from "./contexts/AuthContext.js";
 import { Login } from "./components/Login/Login.js";
 import { Register } from "./components/Register/Register.js";
 import { Logout } from "./components/Logout/Logout.js"
+import { BecomeRestaurateur } from "./components/BecomeRestaurateur/BecomeRestaurateur.js";
 
 function App() {
   const navigate = useNavigate();
   const [restaurants, setRestaurants] = useState([]);
   const [auth, setAuth] = useState({});
   const authService = authServiceFactory(auth.accessToken);
-
 
   const getCatalogSubmit = async (city) => {
     try{
@@ -36,6 +36,25 @@ function App() {
     navigate('/catalog')
     } catch (error){
       console.log("Get problem");
+    }
+  }
+
+  const onBecomeRestaurateur = async () => {
+    try {
+      const response = await fetch(`/api/restaurateur/become`, {
+        method: "POST", // GET, POST, PUT, DELETE, etc.
+        mode: "cors", // no-cors,cors, same-origin
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(auth),
+      });
+  
+      const result = await response.json();
+
+      navigate("/");
+    } catch (error) {
+      console.log("BecomeRestaurateur problem");
     }
   }
 
@@ -92,6 +111,7 @@ function App() {
 
   const contextValues = {
     getCatalogSubmit,
+    onBecomeRestaurateur,    
     onLoginSubmit,
     onRegisterSubmit,
     onLogout,
@@ -114,6 +134,7 @@ function App() {
             <Route path='/logout' element={<Logout />} />
             <Route path="/menu" element={<Menu />} />
             <Route path="/catalog" element={<Catalog restaurants={restaurants}/>} />
+            <Route path="/becomeRestaurateur" element={<BecomeRestaurateur/>} />
           </Routes>
         </main>
 

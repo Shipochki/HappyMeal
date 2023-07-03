@@ -15,6 +15,6 @@
 
 		public HashSet<Restaurant> Restaurants { get; set;} = new HashSet<Restaurant>();
 
-		public bool IsActive { get; set; } = true;
+		public bool IsActive { get; set; } = false;
 	}
 }

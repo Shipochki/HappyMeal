@@ -9,5 +9,7 @@ namespace HappyMeal.Core.Services.Restaurateur
 	public interface IRestaurateurService
 	{
 		Task<bool> IsRestaurateur(int userId);
+
+		Task Become(object auth);
 	}
 }
