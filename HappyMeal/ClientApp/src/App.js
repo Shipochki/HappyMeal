@@ -11,10 +11,12 @@ import { Login } from "./components/Login/Login.js";
 import { Register } from "./components/Register/Register.js";
 import { Logout } from "./components/Logout/Logout.js"
 import { BecomeRestaurateur } from "./components/BecomeRestaurateur/BecomeRestaurateur.js";
+import { Candidates } from "./components/Candidates/Candidates.js";
 
 function App() {
   const navigate = useNavigate();
   const [restaurants, setRestaurants] = useState([]);
+  const [candidates, setCandidates] = useState([]);
   const [auth, setAuth] = useState({});
   const authService = authServiceFactory(auth.accessToken);
 
@@ -58,6 +60,24 @@ function App() {
     }
   }
 
+  const getAllCandidates = async () => {
+    try{
+      const response = await fetch(`/api/restaurateur/getallcandidates`, {
+      method: "GET", // GET, POST, PUT, DELETE, etc.
+    });
+
+    const data = await response.json();
+
+    setCandidates(data);
+
+    console.log(data);
+
+    navigate('/menu')
+    } catch (error){
+      console.log("candidates problem");
+    }
+  }
+
   const onLoginSubmit = async (loginFormKeys) => {
     try {
       const response = await fetch(`/api/user/login`, {
@@ -72,6 +92,8 @@ function App() {
       const result = await response.json();
 
       setAuth(result);
+
+      localStorage.setItem("auth", result);
 
       navigate("/");
     } catch (error) {
@@ -111,6 +133,7 @@ function App() {
 
   const contextValues = {
     getCatalogSubmit,
+    getAllCandidates,
     onBecomeRestaurateur,    
     onLoginSubmit,
     onRegisterSubmit,
@@ -118,6 +141,9 @@ function App() {
     userId: auth.id,
     token: auth.accessToken,
     userEmail: auth.email,
+    isCandidate: auth.isCandidate,
+    isRestaurateur: auth.isRestaurateur,
+    isAdmin: auth.isAdmin,
     isAuthenticated: !!auth.accessToken,
   };
 
@@ -135,6 +161,7 @@ function App() {
             <Route path="/menu" element={<Menu />} />
             <Route path="/catalog" element={<Catalog restaurants={restaurants}/>} />
             <Route path="/becomeRestaurateur" element={<BecomeRestaurateur/>} />
+            <Route path="/candidates" element={<Candidates candidates={candidates}/>} />
           </Routes>
         </main>
 

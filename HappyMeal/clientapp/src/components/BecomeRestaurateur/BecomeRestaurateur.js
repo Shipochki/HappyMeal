@@ -9,7 +9,7 @@ export const BecomeRestaurateur = () => {
   useEffect(() => {
     if(isAuthenticated){
        onBecomeRestaurateur(); 
-    }
+    } 
   }, [onBecomeRestaurateur]);
 
   return <Navigate to="/" />;

@@ -7,9 +7,12 @@ import { faShoppingBag } from "@fortawesome/free-solid-svg-icons"
 import './Menu.css'
 import { useContext } from "react"
 import { AuthContext } from "../../contexts/AuthContext"
+import { useForm } from "../../hooks/useForm"
 
 export const Menu = () => {
-    const { isAuthenticated } = useContext(AuthContext);
+    const { isAuthenticated, isCandidate, isRestaurateur, isAdmin, getAllCandidates } = useContext(AuthContext);
+
+    const { onSubmit } = useForm(getAllCandidates);
 
     return(
         <div className="menu">
@@ -27,7 +30,17 @@ export const Menu = () => {
             </div>
             <Link className="cart" to={'/cart'}><FontAwesomeIcon icon={faShoppingBag}/> Cart</Link>
             <Link className="orders" to={'/orders'}><FontAwesomeIcon icon={faCartShopping}/>Orders</Link>
-            <Link className="become" to={'/becomeRestaurateur'}><FontAwesomeIcon icon={faMotorcycle} />Become Restaurateur</Link>
+            {!isCandidate && !isRestaurateur &&(
+                <Link to={'/becomeRestaurateur'}><FontAwesomeIcon icon={faMotorcycle} />Become Restaurateur</Link>                
+            )}
+
+            {isRestaurateur && (
+                <Link to={'/createRestaurant'}>Add Restaurant</Link>
+            )}
+
+            {isAdmin && (
+                <Link onSubmit={onSubmit} to={'/candidates'}>All Candidates</Link>
+            )}
         </div>
     )
 }

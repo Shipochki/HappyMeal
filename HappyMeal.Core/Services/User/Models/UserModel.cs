@@ -20,6 +20,8 @@ namespace HappyMeal.Core.Services.User.Models
 
 		public bool IsRestaurateur { get; set; }
 
+		public bool IsCandidate { get; set; }
+
 		public bool IsAdmin { get; set; }
 	}
 }

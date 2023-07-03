@@ -52,6 +52,7 @@
 			}
 
 			bool isRestaurateur = await this._restaurateurService.IsRestaurateur(user.Id);
+			bool isCandidate = await this._restaurateurService.IsCandidate(user.Id);
 			bool isAdmin = await this._adminService.IsAdmin(user.Id);
 
 			UserModel result = new UserModel()
@@ -62,6 +63,7 @@
 				Email = user.Email,
 				AccessToken = RandomToken(30),
 				IsRestaurateur = isRestaurateur,
+				IsCandidate = isCandidate,
 				IsAdmin = isAdmin
 			};
 

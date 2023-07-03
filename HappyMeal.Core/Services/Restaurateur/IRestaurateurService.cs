@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using HappyMeal.Core.Services.Restaurateur.Models;
 
 namespace HappyMeal.Core.Services.Restaurateur
 {
@@ -11,5 +7,9 @@ namespace HappyMeal.Core.Services.Restaurateur
 		Task<bool> IsRestaurateur(int userId);
 
 		Task Become(object auth);
+
+		Task<List<RestaurateurModel>> GetAllCandidates();
+
+		Task<bool> IsCandidate(int userId);
 	}
 }

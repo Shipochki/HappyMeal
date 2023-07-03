@@ -22,5 +22,12 @@ namespace HappyMeal.Controllers
 			await this._restaurateurService.Become(auth);
 			return Ok();
 		}
+
+		[HttpGet]
+		[Route("[action]")]
+		public async Task<IActionResult> GetAllCandidates()
+		{
+			return Ok(await this._restaurateurService.GetAllCandidates());
+		}
 	}
 }
