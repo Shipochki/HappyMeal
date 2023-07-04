@@ -12,6 +12,8 @@ namespace HappyMeal.Core.Services.Restaurant.Models
 
 		public string Name { get; set; } = null!;
 
+		public string ImgUrlLink { get; set; }
+
 		public int DeliveryTime { get; set; }
 
 		public decimal MinMoneyForOrder { get; set; } 

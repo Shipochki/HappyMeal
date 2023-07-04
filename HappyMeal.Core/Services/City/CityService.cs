@@ -47,11 +47,6 @@
 
 			if(city == null)
 			{
-				CreateCity(new CreateCityModel()
-				{
-					Name = cityName,
-				});
-
 				city = new City()
 				{
 					Name = cityName,

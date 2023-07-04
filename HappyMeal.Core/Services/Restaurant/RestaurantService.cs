@@ -31,6 +31,7 @@
 					Name = r.Name,
 					DeliveryTime = r.DeliveryTime,
 					MinMoneyForOrder = r.MinMoneyForOrder,
+					ImgUrlLink = r.ImgLinkUrl,
 					Rating = r.Reviews.Average(r => r.Rating)
 				})
 				.ToListAsync();
@@ -38,17 +39,20 @@
 
 		public async Task<List<RestaurantModel>> AllByCity(string city)
 		{
-			return await this._context.Restaurants
-				.Where(r => r.City.Name == city)
+			List<RestaurantModel> result = await this._context.Restaurants
+				.Include(r => r.Reviews)
+				.Where(r => r.City.Name.ToLower() == city.ToLower())
 				.Select(r => new RestaurantModel
 				{
 					Id = r.Id,
 					Name = r.Name,
 					DeliveryTime = r.DeliveryTime,
 					MinMoneyForOrder = r.MinMoneyForOrder,
-					Rating = r.Reviews.Average(r => r.Rating)
+					ImgUrlLink = r.ImgLinkUrl,
 				})
 				.ToListAsync();
+
+			return result;
 		}
 
 		public async Task<int> CreateRestaurant(object data)

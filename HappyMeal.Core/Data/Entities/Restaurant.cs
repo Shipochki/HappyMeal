@@ -41,6 +41,6 @@
 
 		public HashSet<Order> Orders { get; set; } = new HashSet<Order>();
 
-		public bool IsActive { get; set; }
+		public bool IsActive { get; set; } = true;
 	}
 }

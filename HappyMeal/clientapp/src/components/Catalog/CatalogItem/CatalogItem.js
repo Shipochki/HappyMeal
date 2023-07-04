@@ -4,6 +4,7 @@ export const CatalogItem = ({
     id,
     name,
     deliveyTime,
+    imgUrlLink,
     minMoneyForOrder,
     rating
 }) => {
@@ -13,7 +14,8 @@ export const CatalogItem = ({
             <p>{deliveyTime}</p>
             <p>{minMoneyForOrder}</p>
             <p>{rating}</p>
-            <Link to={`/restaurant/${id}`}>Details</Link>
+            <img src={`${imgUrlLink}`}/>
+            <Link to={`/restaurant`}>Details</Link>
         </div>
     )
 }
