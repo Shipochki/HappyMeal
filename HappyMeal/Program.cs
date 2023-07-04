@@ -5,6 +5,7 @@ using HappyMeal.Core.Services.Cart;
 using HappyMeal.Core.Services.City;
 using HappyMeal.Core.Services.Restaurant;
 using HappyMeal.Core.Services.Restaurateur;
+using HappyMeal.Core.Services.Review;
 using HappyMeal.Core.Services.User;
 using Microsoft.EntityFrameworkCore;
 
@@ -26,6 +27,7 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ICartService, CartService>();
 builder.Services.AddScoped<IRestaurateurService, RestaurateurService>();
 builder.Services.AddScoped<IAdminService, AdminService>();
+builder.Services.AddScoped<IReviewService, ReviewService>();
 
 var app = builder.Build();
 

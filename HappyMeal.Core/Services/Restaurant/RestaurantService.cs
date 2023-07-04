@@ -4,6 +4,7 @@
 	using HappyMeal.Core.Services.City;
 	using HappyMeal.Core.Services.Restaurant.Models;
 	using HappyMeal.Core.Services.Restaurateur;
+	using HappyMeal.Core.Services.Review;
 	using Microsoft.EntityFrameworkCore;
 	using Newtonsoft.Json;
 
@@ -12,14 +13,17 @@
 		private readonly HappyMealDbContext _context;
 		private readonly ICityService _cityService;
 		private readonly IRestaurateurService _restaurateurService;
+		private readonly IReviewService _reviewService;
 
 		public RestaurantService(HappyMealDbContext context, 
 			ICityService cityService,
-			IRestaurateurService restaurateurService)
+			IRestaurateurService restaurateurService,
+			IReviewService reviewService)
 		{
 			_context = context;
 			_cityService = cityService;
 			_restaurateurService = restaurateurService;
+			_reviewService = reviewService;
 		}
 
 		public async Task<List<RestaurantModel>> All()
@@ -49,6 +53,7 @@
 					DeliveryTime = r.DeliveryTime,
 					MinMoneyForOrder = r.MinMoneyForOrder,
 					ImgUrlLink = r.ImgLinkUrl,
+					Rating = 0
 				})
 				.ToListAsync();
 
