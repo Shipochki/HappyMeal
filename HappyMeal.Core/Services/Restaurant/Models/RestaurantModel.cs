@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HappyMeal.Core.Services.Restaurant.Models
+﻿namespace HappyMeal.Core.Services.Restaurant.Models
 {
 	public class RestaurantModel
 	{
@@ -19,5 +13,6 @@ namespace HappyMeal.Core.Services.Restaurant.Models
 		public decimal MinMoneyForOrder { get; set; } 
 
 		public double Rating { get; set; }
+
 	}
 }

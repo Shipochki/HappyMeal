@@ -2,6 +2,7 @@
 {
 	using HappyMeal.Core.Data.Entities;
 	using HappyMeal.Core.Services.City;
+	using HappyMeal.Core.Services.Product.Models;
 	using HappyMeal.Core.Services.Restaurant.Models;
 	using HappyMeal.Core.Services.Restaurateur;
 	using HappyMeal.Core.Services.Review;
@@ -100,6 +101,19 @@
 					ImgLinkUrl = r.ImgLinkUrl,
 					DeliveryTime = r.DeliveryTime,
 					MinMoneyForOrder = r.MinMoneyForOrder,
+					OwnerId = r.OwnerId,
+					Products = r.Products
+								.Where(p => p.RestaurantId == id)
+								.Select(p => new ProductModel
+								{
+									Id = p.Id,
+									Name = p.Name,
+									Description = p.Description,
+									Type = p.Type.ToString(),
+									Price = p.Price,
+									Weight = p.Weight,
+								})
+								.ToList()
 				})
 				.FirstOrDefaultAsync(r => r.Id == id);
 

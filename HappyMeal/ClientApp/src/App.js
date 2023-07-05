@@ -101,6 +101,10 @@ function App() {
     }
   }
 
+  const addProductToRestaurant = async (id) => {
+
+  }
+
   const approveCandidate = async (id) => {
     try {
       const response = await fetch(`/api/restaurateur/approvecandidate`, {
@@ -202,7 +206,9 @@ function App() {
     onLogout,
     onCreateRestaurant,
     getRestaurantById,
+    addProductToRestaurant,
     userId: auth.id,
+    restaurateurId: auth.restaurateurId,
     token: auth.accessToken,
     userEmail: auth.email,
     isCandidate: auth.isCandidate,

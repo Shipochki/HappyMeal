@@ -10,6 +10,8 @@ namespace HappyMeal.Core.Services.User.Models
 	{
 		public int Id { get; set; }
 
+		public int RestaurateurId { get; set; }
+
 		public string FirstName { get; set; }
 
 		public string LastName { get; set; }

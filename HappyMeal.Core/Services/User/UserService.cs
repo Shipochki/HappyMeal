@@ -53,11 +53,13 @@
 
 			bool isRestaurateur = await this._restaurateurService.IsRestaurateur(user.Id);
 			bool isCandidate = await this._restaurateurService.IsCandidate(user.Id);
+			int restaurateurId = await this._restaurateurService.GetRestaurateurByUserId(user.Id);
 			bool isAdmin = await this._adminService.IsAdmin(user.Id);
 
 			UserModel result = new UserModel()
 			{
 				Id = user.Id,
+				RestaurateurId = restaurateurId,
 				FirstName = user.FirstName,
 				LastName = user.LastName,
 				Email = user.Email,
@@ -108,6 +110,7 @@
 			UserModel result = new UserModel()
 			{
 				Id = newUser.Id,
+				RestaurateurId = -1,
 				FirstName = newUser.FirstName,
 				LastName = newUser.LastName,
 				Email = newUser.Email,

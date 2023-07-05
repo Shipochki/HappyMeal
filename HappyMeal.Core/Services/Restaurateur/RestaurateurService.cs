@@ -98,6 +98,11 @@
 				.Restaurateurs
 				.FirstOrDefaultAsync(r => r.UserId == id);
 
+			if(restaurateur == null)
+			{
+				return -1;
+			}
+
 			return restaurateur.Id;
 		}
 	}

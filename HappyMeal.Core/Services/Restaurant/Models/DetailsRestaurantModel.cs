@@ -1,10 +1,4 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using HappyMeal.Core.Services.Product.Models;
 
 namespace HappyMeal.Core.Services.Restaurant.Models
 {
@@ -21,5 +15,9 @@ namespace HappyMeal.Core.Services.Restaurant.Models
 		public int DeliveryTime { get; set; }
 
 		public decimal MinMoneyForOrder { get; set; }
+
+		public int OwnerId { get; set; }
+
+		public List<ProductModel> Products { get; set; }
 	}
 }
