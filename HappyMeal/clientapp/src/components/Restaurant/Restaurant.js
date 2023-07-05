@@ -14,7 +14,7 @@ export const Restaurant = ({
             <p>{restaurant.description}</p>
             <img src={`${restaurant.imgLinkUrl}`}/>
             {isRestaurateur && restaurateurId === restaurant.ownerId && (
-                <Link to={'/addProduct'}>Add Product</Link>
+                <Link to={`/addProduct`}>Add Product</Link>
             )}
         </div>
     )

@@ -104,7 +104,7 @@
 					OwnerId = r.OwnerId,
 					Products = r.Products
 								.Where(p => p.RestaurantId == id)
-								.Select(p => new CreateProductModel
+								.Select(p => new ProductModel
 								{
 									Id = p.Id,
 									Name = p.Name,

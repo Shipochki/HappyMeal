@@ -14,6 +14,7 @@ import { BecomeRestaurateur } from "./components/BecomeRestaurateur/BecomeRestau
 import { Candidates } from "./components/Candidates/Candidates.js";
 import { AddRestaurant } from "./components/AddRestaurant/AddRestaurant.js";
 import { Restaurant } from "./components/Restaurant/Restaurant.js";
+import { AddProduct } from "./components/AddProduct/AddProduct.js";
 
 function App() {
   const navigate = useNavigate();
@@ -101,8 +102,23 @@ function App() {
     }
   }
 
-  const addProductToRestaurant = async (id) => {
+  const onCreateProduct = async (createFormKeys) => {
+    try {
+      const response = await fetch(`/api/product/addProduct`, {
+        method: "POST", // GET, POST, PUT, DELETE, etc.
+        mode: "cors", // no-cors,cors, same-origin
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(createFormKeys),
+      });
+  
+      const id = await response.json();
 
+      navigate(`/product/${id}`);
+    } catch (error) {
+      console.log("create product problem");
+    }
   }
 
   const approveCandidate = async (id) => {
@@ -206,7 +222,7 @@ function App() {
     onLogout,
     onCreateRestaurant,
     getRestaurantById,
-    addProductToRestaurant,
+    onCreateProduct,
     userId: auth.id,
     restaurateurId: auth.restaurateurId,
     token: auth.accessToken,
@@ -234,6 +250,7 @@ function App() {
             <Route path="/candidates" element={<Candidates candidates={candidates}/>} />
             <Route path="/createRestaurant" element={<AddRestaurant />} />
             <Route path="/restaurant" element={<Restaurant restaurant={restaurant}/>} />
+            <Route path="/addProduct" element={<AddProduct restaurant={restaurant}/>} />
           </Routes>
         </main>
 

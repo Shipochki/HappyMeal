@@ -3,6 +3,7 @@ using HappyMeal.Core.Data.Entities;
 using HappyMeal.Core.Services.Admin;
 using HappyMeal.Core.Services.Cart;
 using HappyMeal.Core.Services.City;
+using HappyMeal.Core.Services.Product;
 using HappyMeal.Core.Services.Restaurant;
 using HappyMeal.Core.Services.Restaurateur;
 using HappyMeal.Core.Services.Review;
@@ -28,6 +29,7 @@ builder.Services.AddScoped<ICartService, CartService>();
 builder.Services.AddScoped<IRestaurateurService, RestaurateurService>();
 builder.Services.AddScoped<IAdminService, AdminService>();
 builder.Services.AddScoped<IReviewService, ReviewService>();
+builder.Services.AddScoped<IProductService, ProductService>();
 
 var app = builder.Build();
 

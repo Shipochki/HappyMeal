@@ -14,7 +14,8 @@ const context =  [
   "/api/restaurateur/getallcandidates",
   "/api/restaurateur/approvecandidate",
   "/api/restaurant/createrestaurant",
-  "/api/restaurant/detailsrestaurant"
+  "/api/restaurant/detailsrestaurant",
+  "/api/product/addProduct"
 ];
 
 module.exports = function(app) {
