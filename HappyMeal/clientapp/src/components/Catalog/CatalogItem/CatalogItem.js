@@ -1,4 +1,5 @@
-import { Link } from "react-router-dom"
+import { useContext } from "react";
+import { AuthContext } from "../../../contexts/AuthContext";
 
 export const CatalogItem = ({
     id,
@@ -8,6 +9,7 @@ export const CatalogItem = ({
     minMoneyForOrder,
     rating
 }) => {
+    const { getRestaurantById } = useContext(AuthContext);
     return(
         <div className="card">
             <h2>{name}</h2>
@@ -15,7 +17,11 @@ export const CatalogItem = ({
             <p>{minMoneyForOrder}</p>
             <p>{rating}</p>
             <img src={`${imgUrlLink}`}/>
-            <Link to={`/restaurant`}>Details</Link>
+            <form method="POST">
+            <a onClick={() => {
+                getRestaurantById(id);
+            }}>Details</a>
+            </form>
         </div>
     )
 }

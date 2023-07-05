@@ -13,12 +13,14 @@ import { Logout } from "./components/Logout/Logout.js"
 import { BecomeRestaurateur } from "./components/BecomeRestaurateur/BecomeRestaurateur.js";
 import { Candidates } from "./components/Candidates/Candidates.js";
 import { AddRestaurant } from "./components/AddRestaurant/AddRestaurant.js";
+import { Restaurant } from "./components/Restaurant/Restaurant.js";
 
 function App() {
   const navigate = useNavigate();
   const [restaurants, setRestaurants] = useState([]);
   const [candidates, setCandidates] = useState([]);
   const [auth, setAuth] = useState({});
+  const [restaurant, setRestaurant] = useState({});
   const authService = authServiceFactory(auth.accessToken);
 
   const getCatalogSubmit = async (city) => {
@@ -71,11 +73,31 @@ function App() {
 
     setCandidates(data);
 
-    console.log(data);
-
     navigate('/menu')
     } catch (error){
       console.log("candidates problem");
+    }
+  }
+
+  const getRestaurantById = async (idr) => {
+    const id = idr;
+    try {
+      const response = await fetch(`/api/restaurant/detailsrestaurant`, {
+        method: "POST", // GET, POST, PUT, DELETE, etc.
+        mode: "cors", // no-cors,cors, same-origin
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(id),
+      });
+  
+      const result = await response.json();
+
+      setRestaurant(result);
+
+      navigate('/restaurant')
+    } catch (error) {
+      console.log("getRestaurant problem");
     }
   }
 
@@ -179,6 +201,7 @@ function App() {
     onRegisterSubmit,
     onLogout,
     onCreateRestaurant,
+    getRestaurantById,
     userId: auth.id,
     token: auth.accessToken,
     userEmail: auth.email,
@@ -204,6 +227,7 @@ function App() {
             <Route path="/becomeRestaurateur" element={<BecomeRestaurateur/>} />
             <Route path="/candidates" element={<Candidates candidates={candidates}/>} />
             <Route path="/createRestaurant" element={<AddRestaurant />} />
+            <Route path="/restaurant" element={<Restaurant restaurant={restaurant}/>} />
           </Routes>
         </main>
 

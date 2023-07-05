@@ -100,8 +100,6 @@
 					ImgLinkUrl = r.ImgLinkUrl,
 					DeliveryTime = r.DeliveryTime,
 					MinMoneyForOrder = r.MinMoneyForOrder,
-					OwnerId = r.OwnerId,
-					CityName = r.City.Name,
 				})
 				.FirstOrDefaultAsync(r => r.Id == id);
 

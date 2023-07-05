@@ -21,9 +21,5 @@ namespace HappyMeal.Core.Services.Restaurant.Models
 		public int DeliveryTime { get; set; }
 
 		public decimal MinMoneyForOrder { get; set; }
-
-		public int OwnerId { get; set; }
-
-		public string CityName { get; set; }
 	}
 }
