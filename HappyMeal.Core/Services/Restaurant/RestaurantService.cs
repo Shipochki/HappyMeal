@@ -63,7 +63,7 @@
 
 		public async Task<int> CreateRestaurant(object data)
 		{
-			CreateRestaurantJSONModel model = JsonConvert.DeserializeObject<CreateRestaurantJSONModel>(data.ToString());
+			CreateRestaurantJSONModel? model = JsonConvert.DeserializeObject<CreateRestaurantJSONModel>(data.ToString());
 
 			if(model == null)
 			{
@@ -92,7 +92,7 @@
 
 		public async Task<DetailsRestaurantModel> GetRestaurantById(int id)
 		{
-			DetailsRestaurantModel restaurant = await this._context.Restaurants
+			DetailsRestaurantModel? restaurant = await this._context.Restaurants
 				.Select(r => new DetailsRestaurantModel()
 				{
 					Id = r.Id,
@@ -104,7 +104,7 @@
 					OwnerId = r.OwnerId,
 					Products = r.Products
 								.Where(p => p.RestaurantId == id)
-								.Select(p => new ProductModel
+								.Select(p => new CreateProductModel
 								{
 									Id = p.Id,
 									Name = p.Name,

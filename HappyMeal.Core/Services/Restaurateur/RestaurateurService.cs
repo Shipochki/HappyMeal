@@ -18,7 +18,12 @@
 
 		public async Task Become(object auth)
 		{
-			UserJSONModel model = JsonConvert.DeserializeObject<UserJSONModel>(auth.ToString());
+			UserJSONModel? model = JsonConvert.DeserializeObject<UserJSONModel>(auth.ToString());
+
+			if(model == null)
+			{
+				return;
+			}
 
 			if (model.IsRestaurateur)
 			{
@@ -52,7 +57,7 @@
 
 		public async Task<bool> IsRestaurateur(int userId)
 		{
-			Restaurateur restaurateur = await this._context
+			Restaurateur? restaurateur = await this._context
 				.Restaurateurs
 				.FirstOrDefaultAsync(r => r.UserId == userId && r.IsActive);
 
@@ -66,7 +71,7 @@
 
 		public async Task<bool> IsCandidate(int userId)
 		{
-			Restaurateur restaurateur = await this._context
+			Restaurateur? restaurateur = await this._context
 				.Restaurateurs
 				.FirstOrDefaultAsync(r => r.UserId == userId && r.IsActive == false);
 
@@ -80,7 +85,7 @@
 
 		public async Task ApproveCandidate(int id)
 		{
-			Restaurateur restaurateur = await this._context
+			Restaurateur? restaurateur = await this._context
 				.Restaurateurs
 				.FirstOrDefaultAsync(r  => r.Id == id);
 
@@ -94,7 +99,7 @@
 
 		public async Task<int> GetRestaurateurByUserId(int id)
 		{
-			Restaurateur restaurateur = await this._context
+			Restaurateur? restaurateur = await this._context
 				.Restaurateurs
 				.FirstOrDefaultAsync(r => r.UserId == id);
 

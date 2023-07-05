@@ -1,9 +1,8 @@
-﻿using HappyMeal.Core.Services.Restaurateur;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-
-namespace HappyMeal.Controllers
+﻿namespace HappyMeal.Controllers
 {
+	using HappyMeal.Core.Services.Restaurateur;
+	using Microsoft.AspNetCore.Mvc;
+
 	[Route("api/[controller]")]
 	[ApiController]
 	public class RestaurateurController : ControllerBase

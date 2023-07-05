@@ -41,7 +41,7 @@
 
 		public async Task<int> GetCityIdByName(string cityName)
 		{
-			City city = await this._context
+			City? city = await this._context
 				.Cities
 				.FirstOrDefaultAsync(c => c.Name == cityName);
 

@@ -18,6 +18,6 @@ namespace HappyMeal.Core.Services.Restaurant.Models
 
 		public int OwnerId { get; set; }
 
-		public List<ProductModel> Products { get; set; }
+		public List<CreateProductModel> Products { get; set; }
 	}
 }

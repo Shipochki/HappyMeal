@@ -37,7 +37,7 @@
 				return null;
 			}
 
-			User user = await this._context
+			User? user = await this._context
 				.Users
 				.FirstOrDefaultAsync(u => u.Email == model.Email);
 
@@ -74,14 +74,14 @@
 
 		public async Task<UserModel> Register(object registerFormKeys)
 		{
-			RegisterUserJSONModel model = JsonConvert.DeserializeObject<RegisterUserJSONModel>(registerFormKeys.ToString());
+			RegisterUserJSONModel? model = JsonConvert.DeserializeObject<RegisterUserJSONModel>(registerFormKeys.ToString());
 
 			if (model == null || !IsValid(model))
 			{
 				return null;
 			}
 
-			User user = await this._context
+			User? user = await this._context
 				.Users
 				.FirstOrDefaultAsync(u => u.Email == model.Email);
 

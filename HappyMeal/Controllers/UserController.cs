@@ -1,8 +1,8 @@
-﻿using HappyMeal.Core.Services.User;
-using Microsoft.AspNetCore.Mvc;
-
-namespace HappyMeal.Controllers
+﻿namespace HappyMeal.Controllers
 {
+	using HappyMeal.Core.Services.User;
+	using Microsoft.AspNetCore.Mvc;
+
 	[Route("api/[controller]")]
 	[ApiController]
 	public class UserController : ControllerBase

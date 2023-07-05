@@ -1,12 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HappyMeal.Core.Services.Review
+﻿namespace HappyMeal.Core.Services.Review
 {
+	using Microsoft.EntityFrameworkCore;
+
 	public class ReviewService : IReviewService
 	{
 		private readonly HappyMealDbContext _context;

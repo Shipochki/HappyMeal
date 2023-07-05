@@ -14,7 +14,7 @@
 
 		public async Task<bool> IsAdmin(int userId)
 		{
-			Admin admin = await this._context
+			Admin? admin = await this._context
 				.Admins
 				.FirstOrDefaultAsync(a => a.UserId == userId);
 
