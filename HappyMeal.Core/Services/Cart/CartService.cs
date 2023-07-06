@@ -28,7 +28,18 @@
 				return null;
 			}
 
-			return null;
+			Cart? cart = await this._context.Carts.FirstOrDefaultAsync(c => c.UserId == model.UserId);
+
+			if( cart == null )
+			{
+				return null;
+			}
+
+			await this._context.CartsProducts.AddAsync(new CartProduct { ProductId = model.ProductId, CartId = cart.Id });
+
+			await this._context.SaveChangesAsync();
+
+			return await GetCartByUserId(model.UserId);
 		}
 
 		public async Task CreateCart(int userId)

@@ -104,9 +104,27 @@ function App() {
     }
   }
 
-  const addproudctToCart = (product) => {
+  const addproudctToCart = async (data) => {
+    try {
+      const response = await fetch(`/api/cart/addproducttocart`, {
+        method: "POST", // GET, POST, PUT, DELETE, etc.
+        mode: "cors", // no-cors,cors, same-origin
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+  
+      const result = await response.json();
 
+      setCart(result);
+
+      navigate(`/cart`);
+    } catch (error) {
+      console.log("cart add product problem");
+    }
   }
+
 
   const getRestaurantById = async (idr) => {
     const id = idr;
@@ -252,6 +270,7 @@ function App() {
     getRestaurantById,
     onCreateProduct,
     getCartByUserId,
+    addproudctToCart,
     userId: auth.id,
     restaurateurId: auth.restaurateurId,
     token: auth.accessToken,
