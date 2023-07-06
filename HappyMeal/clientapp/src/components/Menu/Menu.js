@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import { Link, redirect, useNavigate } from "react-router-dom"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faMotorcycle } from "@fortawesome/free-solid-svg-icons"
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons"
@@ -10,6 +10,7 @@ import { AuthContext } from "../../contexts/AuthContext"
 
 export const Menu = () => {
     const { isAuthenticated, isCandidate, isRestaurateur, isAdmin, getAllCandidates, getCartByUserId } = useContext(AuthContext);
+    const navigate = useNavigate();
     return(
         <div className="menu">
             <div className="log-sign-btns">
@@ -25,8 +26,11 @@ export const Menu = () => {
                 )}
             </div>
             <Link className="cart" onClick={() => {
+                if(!isAuthenticated){
+                   return;
+                }
                 getCartByUserId();
-            }} to={'/cart'}><FontAwesomeIcon icon={faShoppingBag}/> Cart</Link>
+            }}><FontAwesomeIcon icon={faShoppingBag}/> Cart</Link>
 
             <Link className="orders" to={'/orders'}><FontAwesomeIcon icon={faCartShopping}/>Orders</Link>
             {!isCandidate && !isRestaurateur &&(

@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
+import { Product } from "../Product/Product";
 
 export const Restaurant = ({
     restaurant
@@ -16,6 +17,11 @@ export const Restaurant = ({
             {isRestaurateur && restaurateurId === restaurant.ownerId && (
                 <Link to={`/addProduct`}>Add Product</Link>
             )}
+            <div>
+                {restaurant.products.map(x =>
+            <Product key={x.id} {...x}/> 
+            )}
+            </div>
         </div>
     )
 }

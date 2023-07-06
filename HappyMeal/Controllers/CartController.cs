@@ -17,9 +17,16 @@ namespace HappyMeal.Controllers
 
 		[HttpPost]
 		[Route("[action]")]
-		public async Task<IActionResult> GetCartByUserId(int userId) 
+		public async Task<IActionResult> GetCartByUserId([FromBody]int userId) 
 		{
 			return Ok(await this._cartService.GetCartByUserId(userId));
+		}
+
+		[HttpPost]
+		[Route("[action]")]
+		public async Task<IActionResult> AddProductToCart([FromBody]object data)
+		{
+			return Ok(await this._cartService.AddProductToCart(data));
 		}
 	}
 }

@@ -2,16 +2,33 @@
 {
 	using HappyMeal.Core.Data.Entities;
 	using HappyMeal.Core.Services.Cart.Models;
+	using HappyMeal.Core.Services.Product;
 	using HappyMeal.Core.Services.Product.Models;
 	using Microsoft.EntityFrameworkCore;
+	using Newtonsoft.Json;
 
 	public class CartService : ICartService
 	{
 		private HappyMealDbContext _context;
+		private readonly IProductService _productService;
 
-		public CartService(HappyMealDbContext context)
+		public CartService(HappyMealDbContext context,
+			IProductService productService)
 		{
 			_context = context;
+			_productService = productService;
+		}
+
+		public async Task<CartModel> AddProductToCart(object data)
+		{
+			AddProductToCartJSONModel model = JsonConvert.DeserializeObject<AddProductToCartJSONModel>(data.ToString());
+
+			if(model == null )
+			{
+				return null;
+			}
+
+			return null;
 		}
 
 		public async Task CreateCart(int userId)

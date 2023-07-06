@@ -83,6 +83,7 @@ function App() {
   }
 
   const getCartByUserId = async () => {
+    const userId = auth.id;
     try {
       const response = await fetch(`/api/cart/getcartbyuserid`, {
         method: "POST", // GET, POST, PUT, DELETE, etc.
@@ -90,7 +91,7 @@ function App() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(auth.id),
+        body: JSON.stringify(userId),
       });
   
       const result = await response.json();
@@ -101,6 +102,10 @@ function App() {
     } catch (error) {
       console.log("getCart problem");
     }
+  }
+
+  const addproudctToCart = (product) => {
+
   }
 
   const getRestaurantById = async (idr) => {
@@ -138,7 +143,7 @@ function App() {
   
       const id = await response.json();
 
-      navigate(`/product/${id}`);
+      navigate(`/restaurant`);
     } catch (error) {
       console.log("create product problem");
     }
