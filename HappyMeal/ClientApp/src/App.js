@@ -15,6 +15,7 @@ import { Candidates } from "./components/Candidates/Candidates.js";
 import { AddRestaurant } from "./components/AddRestaurant/AddRestaurant.js";
 import { Restaurant } from "./components/Restaurant/Restaurant.js";
 import { AddProduct } from "./components/AddProduct/AddProduct.js";
+import { Cart } from "./components/Cart/Cart.js";
 
 function App() {
   const navigate = useNavigate();
@@ -22,6 +23,7 @@ function App() {
   const [candidates, setCandidates] = useState([]);
   const [auth, setAuth] = useState({});
   const [restaurant, setRestaurant] = useState({});
+  const [cart, setCart] = useState({});
   const authService = authServiceFactory(auth.accessToken);
 
   const getCatalogSubmit = async (city) => {
@@ -77,6 +79,27 @@ function App() {
     navigate('/menu')
     } catch (error){
       console.log("candidates problem");
+    }
+  }
+
+  const getCartByUserId = async () => {
+    try {
+      const response = await fetch(`/api/cart/getcartbyuserid`, {
+        method: "POST", // GET, POST, PUT, DELETE, etc.
+        mode: "cors", // no-cors,cors, same-origin
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(auth.id),
+      });
+  
+      const result = await response.json();
+
+      setCart(result);
+
+      navigate('/cart')
+    } catch (error) {
+      console.log("getCart problem");
     }
   }
 
@@ -223,6 +246,7 @@ function App() {
     onCreateRestaurant,
     getRestaurantById,
     onCreateProduct,
+    getCartByUserId,
     userId: auth.id,
     restaurateurId: auth.restaurateurId,
     token: auth.accessToken,
@@ -251,6 +275,7 @@ function App() {
             <Route path="/createRestaurant" element={<AddRestaurant />} />
             <Route path="/restaurant" element={<Restaurant restaurant={restaurant}/>} />
             <Route path="/addProduct" element={<AddProduct restaurant={restaurant}/>} />
+            <Route path="/cart" element={<Cart cart={cart}/>} />
           </Routes>
         </main>
 
