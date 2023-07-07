@@ -236,8 +236,6 @@ function App() {
       const result = await response.json();
 
       setCart(result);
-
-      return result;
     } catch (error) {
       console.log("getCart problem");
     }
@@ -318,6 +316,7 @@ function App() {
     isRestaurateur: auth.isRestaurateur,
     isAdmin: auth.isAdmin,
     isAuthenticated: !!auth.accessToken,
+    cart: cart,
   };
 
   return (
@@ -336,7 +335,7 @@ function App() {
             <Route path="/becomeRestaurateur" element={<BecomeRestaurateur/>} />
             <Route path="/candidates" element={<Candidates candidates={candidates}/>} />
             <Route path="/createRestaurant" element={<AddRestaurant />} />
-            <Route path="/restaurant" element={<Restaurant restaurant={restaurant} cart={cart}/>} />
+            <Route path="/restaurant" element={<Restaurant restaurant={restaurant}/>} />
             <Route path="/addProduct" element={<AddProduct restaurant={restaurant}/>} />
             <Route path="/cart" element={<Cart cart={cart}/>} />
           </Routes>

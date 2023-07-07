@@ -1,24 +1,32 @@
 import { useContext } from "react";
-import { CartProduct } from "../../Cart/CartProduct/CartProduct"
-import { AuthContext } from "../../../contexts/AuthContext";
+import { Link } from "react-router-dom";
+import { ResCartProduct } from "./ResCartProduct/ResCartProduct.js";
+import { AuthContext } from "../../../contexts/AuthContext.js";
 
 export const RestaurantCart = ({cart}) => {
     const { isAuthenticated } = useContext(AuthContext);
 
     if(!isAuthenticated){
         return(
-                <h2>Empty</h2>
+            <div>
+                <h2>Not login</h2>
+                <Link to={"/login"}>Login</Link>
+                </div>
             )
     }
 
     return(
         <div className="res-cart">
-        <h2>My Cart</h2>
-        <p>{cart.deliveryCosts}</p>
-        <p>{cart.subtotal}</p>
-        {cart.products.map(x =>
-            <CartProduct key={x.id} {...x}/> 
+            <div className="res-cart-info">
+                <h2>My Cart</h2>
+                <p>Delivery costs: {cart.deliveryCosts} lv.</p>
+                <p>Total: {cart.subtotal} lv.</p>
+            </div>
+            <div className="cart-products">
+                {cart.products?.map(x =>
+            <ResCartProduct key={x.id} {...x}/> 
           )}
+            </div>
         </div>
     )
 }

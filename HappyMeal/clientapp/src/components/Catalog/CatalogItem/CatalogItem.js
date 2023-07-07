@@ -10,10 +10,13 @@ export const CatalogItem = ({
     minMoneyForOrder,
     rating
 }) => {
-    const { getRestaurantById } = useContext(AuthContext);
+    const { getRestaurantById, withGetCartByUserId, isAuthenticated } = useContext(AuthContext);
     return(
         <div onClick={() => {
                 getRestaurantById(id);
+                if(isAuthenticated){
+                    withGetCartByUserId();
+            }
             }} className="cat-card">
             <div className="card-img" style={{backgroundImage: `url(${imgUrlLink})`}}></div>
             <div className="card-info">

@@ -1,17 +1,16 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faX } from "@fortawesome/free-solid-svg-icons";
-import { useContext } from "react";
-import { AuthContext } from "../../../contexts/AuthContext";
+import { useContext } from "react"
+import { AuthContext } from "../../../../contexts/AuthContext";
 
 const data = {
     productId: 0,
     userId: 0
 }
 
-export const CartProduct = ({
+export const ResCartProduct = ({
     id,
     name,
-    description,
     price,
     weight
 }) => {
@@ -21,9 +20,8 @@ export const CartProduct = ({
     return(
         <div className="card-product">
             <p>{name}</p>
-            <p>{description}</p>
-            <p>{price}</p>
-            <p>{weight}</p>
+            <p>Price: {price}</p>
+            <p>Weight: {weight}</p>
             <button onClick={() => {
                 removeProductFromCart(data);
             }}><FontAwesomeIcon icon={faX}/></button>
