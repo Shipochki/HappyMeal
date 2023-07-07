@@ -158,7 +158,7 @@ function App() {
 
       setRestaurant(result);
 
-      navigate('/restaurant')
+      navigate('/restaurant');
     } catch (error) {
       console.log("getRestaurant problem");
     }
@@ -221,6 +221,28 @@ function App() {
     }
   }
 
+  const withGetCartByUserId = async () => {
+    const userId = auth.id;
+    try {
+      const response = await fetch(`/api/cart/getcartbyuserid`, {
+        method: "POST", // GET, POST, PUT, DELETE, etc.
+        mode: "cors", // no-cors,cors, same-origin
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userId),
+      });
+  
+      const result = await response.json();
+
+      setCart(result);
+
+      return result;
+    } catch (error) {
+      console.log("getCart problem");
+    }
+  }
+
   const onLoginSubmit = async (loginFormKeys) => {
     try {
       const response = await fetch(`/api/user/login`, {
@@ -235,8 +257,6 @@ function App() {
       const result = await response.json();
 
       setAuth(result);
-
-      localStorage.setItem("auth", result);
 
       navigate("/");
     } catch (error) {
@@ -272,6 +292,7 @@ function App() {
 
   const onLogout = async () => {
     setAuth({});
+    setCart({});
   };
 
   const contextValues = {
@@ -288,6 +309,7 @@ function App() {
     getCartByUserId,
     addproudctToCart,
     removeProductFromCart,
+    withGetCartByUserId,
     userId: auth.id,
     restaurateurId: auth.restaurateurId,
     token: auth.accessToken,
@@ -314,7 +336,7 @@ function App() {
             <Route path="/becomeRestaurateur" element={<BecomeRestaurateur/>} />
             <Route path="/candidates" element={<Candidates candidates={candidates}/>} />
             <Route path="/createRestaurant" element={<AddRestaurant />} />
-            <Route path="/restaurant" element={<Restaurant restaurant={restaurant}/>} />
+            <Route path="/restaurant" element={<Restaurant restaurant={restaurant} cart={cart}/>} />
             <Route path="/addProduct" element={<AddProduct restaurant={restaurant}/>} />
             <Route path="/cart" element={<Cart cart={cart}/>} />
           </Routes>

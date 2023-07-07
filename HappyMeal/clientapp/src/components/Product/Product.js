@@ -25,13 +25,7 @@ export const Product = ({ id, name, description, price, weight }) => {
         <p>Price: {price} lv.</p>
         <p>Weight: {weight}</p>
       </div>
-      <button
-        onClick={() => {
-          addproudctToCart(data);
-        }}
-      >
-        <FontAwesomeIcon icon={faPlus} />
-      </button>
+      <button><FontAwesomeIcon icon={faPlus} /></button>
     </div>
   );
 };

@@ -14,7 +14,7 @@ export const CatalogItem = ({
     return(
         <div onClick={() => {
                 getRestaurantById(id);
-            }} className="card">
+            }} className="cat-card">
             <div className="card-img" style={{backgroundImage: `url(${imgUrlLink})`}}></div>
             <div className="card-info">
                 <h2>{name}</h2>

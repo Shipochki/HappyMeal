@@ -3,14 +3,20 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
 import { Product } from "../Product/Product";
 import "./Restaurant.css";
+import { RestaurantCart } from "./RestaurantCart/RestaurantCart";
 
 export const Restaurant = ({
-    restaurant
+    restaurant,
+    cart
 }) =>{
-    const { restaurateurId, isRestaurateur } = useContext(AuthContext);
+    const { restaurateurId, isRestaurateur, isAuthenticated, withGetCartByUserId } = useContext(AuthContext);
+    if(isAuthenticated){
+       cart = withGetCartByUserId();
+    }
     return(
-        <div className="main">
-            <img src={`${restaurant.imgLinkUrl}`}/>
+        <div className="main-res">
+            <div className="main-left">
+                <img src={`${restaurant.imgLinkUrl}`}/>
             <div className="res-info"> 
                 <h2>{restaurant.name}</h2>
                 <p>Delivery Time: {restaurant.deliveryTime} min.</p>
@@ -25,6 +31,10 @@ export const Restaurant = ({
                 {restaurant.products.map(x =>
             <Product key={x.id} {...x}/> 
             )}
+            </div>
+            </div>
+            <div className="main-right">
+                <RestaurantCart cart={cart} />
             </div>
         </div>
     )
