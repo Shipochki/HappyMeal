@@ -5,7 +5,7 @@ export const Catalog = ({
 }) =>{
     return (
         <section className="catalog">
-          <h1>All Restaurants</h1>
+          <h1>Order from {restaurants.length} places</h1>
 
           {restaurants.map(x =>
             <CatalogItem key={x.id} {...x}/> 

@@ -15,12 +15,12 @@ export const CatalogItem = ({
         <div onClick={() => {
                 getRestaurantById(id);
             }} className="card">
-            <img src={`${imgUrlLink}`}/>
-            <div>
+            <div className="card-img" style={{backgroundImage: `url(${imgUrlLink})`}}></div>
+            <div className="card-info">
                 <h2>{name}</h2>
-                <p>{deliveryTime}</p>
-                <p>{minMoneyForOrder}</p>
-                <p>{rating}</p>
+                <p>Delivery Time: {deliveryTime} min.</p>
+                <p>Min money for Order: {minMoneyForOrder}lv.</p>
+                <p>Rating: {rating}</p>
             </div>
         </div>
     )

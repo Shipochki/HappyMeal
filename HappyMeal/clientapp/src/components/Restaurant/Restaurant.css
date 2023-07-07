@@ -1,0 +1,46 @@
+.main img{
+    width: 75%;
+}
+
+.res-info{
+    margin: 25px 15%;
+}
+
+.products{
+    padding: 20px 15%;
+    background-color: linen;
+    width: 75%;
+}
+
+.products h3{
+    margin-bottom: 15px;
+}
+
+.prod-card{
+    background-color: white;
+    margin-bottom: 20px;
+    padding: 11px 30px;
+    border-radius: 12px;
+    border: 1px solid lightgray;
+    display: flex;
+}
+
+.prod-card:hover{
+    background-color: lightgray;
+    cursor: pointer;
+}
+
+.prod-card button{
+    margin-left: auto;
+    height: 30px;
+    width: 30px;
+    margin-top: 30px;
+    background-color: linen;
+    border-radius: 50px;
+    border: 1px solid lightgray;
+}
+
+.prod-card button:hover{
+    background-color: white;
+    cursor: pointer;
+}
