@@ -11,5 +11,7 @@
 		Task<CartModel> GetCartByUserId(int userId);
 
 		Task<CartModel> AddProductToCart(object data);
+
+		Task<CartModel> RemoveProductFromCart(object data);
 	}
 }

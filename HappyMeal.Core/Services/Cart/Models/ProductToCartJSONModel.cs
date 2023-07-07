@@ -3,7 +3,7 @@
 	using Newtonsoft.Json;
 
 	[JsonObject]
-	public class AddProductToCartJSONModel
+	public class ProductToCartJSONModel
 	{
 		[JsonProperty("productId")]
 		public int ProductId { get; set; }

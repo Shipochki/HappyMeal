@@ -53,6 +53,7 @@
 				};
 
 				await this._context.AddAsync(city);
+				await this._context.SaveChangesAsync();
 			}
 
 			return city.Id;

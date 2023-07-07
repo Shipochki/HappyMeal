@@ -8,7 +8,7 @@ namespace HappyMeal.Core.Services.Restaurant
 
 		Task<List<RestaurantModel>> All();
 
-		Task<int> CreateRestaurant(object data);
+		Task<DetailsRestaurantModel> CreateRestaurant(object data);
 
 		Task<DetailsRestaurantModel> GetRestaurantById(int id);
 	}

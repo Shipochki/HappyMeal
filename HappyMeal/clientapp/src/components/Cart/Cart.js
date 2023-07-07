@@ -14,9 +14,6 @@ export const Cart = ({cart}) => {
         {cart.products.map(x =>
             <CartProduct key={x.id} {...x}/> 
           )}
-          <button onClick={() => {
-
-          }}><FontAwesomeIcon icon={faX}/></button>
         </div>
     )
 }

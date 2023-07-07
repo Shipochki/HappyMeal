@@ -1,27 +1,27 @@
 import { useContext } from "react";
 import { AuthContext } from "../../../contexts/AuthContext";
+import "./CatalogItem.css";
 
 export const CatalogItem = ({
     id,
     name,
-    deliveyTime,
+    deliveryTime,
     imgUrlLink,
     minMoneyForOrder,
     rating
 }) => {
     const { getRestaurantById } = useContext(AuthContext);
     return(
-        <div className="card">
-            <h2>{name}</h2>
-            <p>{deliveyTime}</p>
-            <p>{minMoneyForOrder}</p>
-            <p>{rating}</p>
-            <img src={`${imgUrlLink}`}/>
-            <form method="POST">
-            <a onClick={() => {
+        <div onClick={() => {
                 getRestaurantById(id);
-            }}>Details</a>
-            </form>
+            }} className="card">
+            <img src={`${imgUrlLink}`}/>
+            <div>
+                <h2>{name}</h2>
+                <p>{deliveryTime}</p>
+                <p>{minMoneyForOrder}</p>
+                <p>{rating}</p>
+            </div>
         </div>
     )
 }

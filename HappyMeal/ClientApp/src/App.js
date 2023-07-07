@@ -76,7 +76,7 @@ function App() {
 
     setCandidates(data);
 
-    navigate('/menu')
+    navigate('/candidates')
     } catch (error){
       console.log("candidates problem");
     }
@@ -118,13 +118,29 @@ function App() {
       const result = await response.json();
 
       setCart(result);
-
-      navigate(`/cart`);
     } catch (error) {
       console.log("cart add product problem");
     }
   }
 
+  const removeProductFromCart = async (data) => {
+    try {
+      const response = await fetch(`/api/cart/removeproductfromcart`, {
+        method: "POST", // GET, POST, PUT, DELETE, etc.
+        mode: "cors", // no-cors,cors, same-origin
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+  
+      const result = await response.json();
+
+      setCart(result);
+    } catch (error) {
+      console.log("cart remove product problem");
+    }
+  }
 
   const getRestaurantById = async (idr) => {
     const id = idr;
@@ -177,10 +193,8 @@ function App() {
         },
         body: JSON.stringify(id.id),
       });
-  
-      const result = await response.json();
 
-      navigate("/menu");
+      navigate("/candidates");
     } catch (error) {
       console.log("approveCandidate problem");
     }
@@ -197,9 +211,11 @@ function App() {
         body: JSON.stringify(createFormKeys),
       });
   
-      const id = await response.json();
+      const result = await response.json();
 
-      navigate(`/restaurant/${id}`);
+      setRestaurant(result);
+
+      navigate('/restaurant')
     } catch (error) {
       console.log("create problem");
     }
@@ -271,6 +287,7 @@ function App() {
     onCreateProduct,
     getCartByUserId,
     addproudctToCart,
+    removeProductFromCart,
     userId: auth.id,
     restaurateurId: auth.restaurateurId,
     token: auth.accessToken,

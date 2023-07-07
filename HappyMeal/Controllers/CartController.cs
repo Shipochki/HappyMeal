@@ -28,5 +28,12 @@ namespace HappyMeal.Controllers
 		{
 			return Ok(await this._cartService.AddProductToCart(data));
 		}
+
+		[HttpPost]
+		[Route("[action]")]
+		public async Task<IActionResult> RemoveProductFromCart([FromBody]object data)
+		{
+			return Ok(await this._cartService.RemoveProductFromCart(data));
+		}
 	}
 }

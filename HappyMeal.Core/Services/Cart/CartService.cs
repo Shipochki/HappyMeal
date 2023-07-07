@@ -21,7 +21,7 @@
 
 		public async Task<CartModel> AddProductToCart(object data)
 		{
-			AddProductToCartJSONModel model = JsonConvert.DeserializeObject<AddProductToCartJSONModel>(data.ToString());
+			ProductToCartJSONModel? model = JsonConvert.DeserializeObject<ProductToCartJSONModel>(data.ToString());
 
 			if(model == null )
 			{
@@ -102,6 +102,41 @@
 			}
 
 			return carts.Count;
+		}
+
+		public async Task<CartModel> RemoveProductFromCart(object data)
+		{
+			ProductToCartJSONModel? model = JsonConvert.DeserializeObject<ProductToCartJSONModel>(data.ToString());
+
+			if (model == null)
+			{
+				return null;
+			}
+
+			Cart? cart = await this._context
+				.Carts
+				.FirstOrDefaultAsync(c => c.UserId == model.UserId);
+
+			if (cart == null)
+			{
+				return null;
+			}
+
+			CartProduct? cartProduct = await this._context
+				.CartsProducts
+				.FirstOrDefaultAsync(cp => cp.CartId == cart.Id 
+				&& cp.ProductId == model.ProductId);
+
+
+			if (cartProduct == null)
+			{
+				return null;
+			}
+
+			this._context.CartsProducts.Remove(cartProduct);
+			await this._context.SaveChangesAsync();
+
+			return await GetCartByUserId(model.UserId);
 		}
 	}
 }

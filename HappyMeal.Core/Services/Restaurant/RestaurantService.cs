@@ -61,13 +61,13 @@
 			return result;
 		}
 
-		public async Task<int> CreateRestaurant(object data)
+		public async Task<DetailsRestaurantModel> CreateRestaurant(object data)
 		{
 			CreateRestaurantJSONModel? model = JsonConvert.DeserializeObject<CreateRestaurantJSONModel>(data.ToString());
 
 			if(model == null)
 			{
-				return -1;
+				return null;
 			}
 
 			int cityId = await this._cityService.GetCityIdByName(model.CityName);
@@ -87,7 +87,7 @@
 			await this._context.Restaurants.AddAsync(restaurant);
 			await this._context.SaveChangesAsync();
 
-			return restaurant.Id;
+			return await GetRestaurantById(restaurant.Id);
 		}
 
 		public async Task<DetailsRestaurantModel> GetRestaurantById(int id)
